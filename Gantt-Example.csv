@@ -1,0 +1,5 @@
+Outline Level,ID,Name,Start,Finish,Duration,% Complete,Predecessors,Resource Names,Color,Notes
+1,1,"Example",2024-07-08,2024-07-26,15 day,50,"","",,"<p><br></p>"
+2,2,"Example Task 1",2024-07-08,2024-07-12,5 day,80,"","Team Member 1",121,"<p><br></p>"
+2,3,"Example Task 2",2024-07-15,2024-07-19,5 day,50,"2FS","Team Member 2",211,"<p><br></p>"
+2,4,"Example Task 3",2024-07-22,2024-07-26,5 day,20,"3FS","Team Member 3",301,"<p><br></p>"

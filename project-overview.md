@@ -17,6 +17,7 @@ This document outlines a 6-week strategic sprint for the Emery business. The pri
 ## 3. Stakeholder Roles & Responsibilities
 
 *   **James Emery (The Visionary):** Provide strategic direction, approve the final brand and marketing strategy, and lead the R&D grant application.
+*   **Lisa Galea (Project Manager):** Facilitate and run the marketing sprint, manage project tasks, track progress, and ensure communication among stakeholders.
 *   **Helena Emery (The Creative):** Lead the development of brand guidelines, content creation, and the implementation of marketing campaigns.
 *   **Isabelle Emery (The Implementer):** Lead the documentation and standardization of business processes, and oversee the integration of new systems and AI tools.
 

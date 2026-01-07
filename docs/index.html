@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Portal - 6-Week Branding and Marketing Sprint</title>
+    <title>Phase 2 Strategic Growth - EMI-Emery Proposal Portal</title>
     <style>
         * {
             margin: 0;
@@ -43,6 +43,17 @@
         .header p {
             font-size: 1.2em;
             opacity: 0.9;
+        }
+
+        .decision-bar {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1.1em;
         }
 
         .nav-tabs {
@@ -138,678 +149,549 @@
             font-weight: 500;
         }
 
-        .progress-bar {
-            width: 100%;
-            height: 8px;
-            background: #e2e8f0;
-            border-radius: 4px;
-            overflow: hidden;
-            margin: 10px 0;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #10b981, #059669);
-            transition: width 0.5s ease;
-        }
-
-        .gantt-container {
-            overflow-x: auto;
-            margin: 20px 0;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        .gantt-chart {
-            min-width: 1000px;
-            position: relative;
-        }
-
-        .gantt-header {
+        .decision-cards {
             display: grid;
-            grid-template-columns: 250px repeat(20, 1fr);
-            background: #f8fafc;
-            padding: 15px 0;
-            font-weight: 600;
-            border-bottom: 2px solid #e2e8f0;
-            position: sticky;
-            top: 0;
-            z-index: 5;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
         }
 
-        .gantt-task-name {
-            padding: 0 20px;
-            display: flex;
-            align-items: center;
-        }
-
-        .gantt-week {
-            text-align: center;
-            padding: 0 5px;
-            border-right: 1px solid #e2e8f0;
-            font-size: 12px;
-        }
-
-        .gantt-row {
-            display: grid;
-            grid-template-columns: 250px repeat(20, 1fr);
-            border-bottom: 1px solid #e2e8f0;
-            align-items: center;
-            min-height: 50px;
-            position: relative;
-        }
-
-        .gantt-row:nth-child(even) {
-            background: #f8fafc;
-        }
-
-        .gantt-task-cell {
-            padding: 0 20px;
-            display: flex;
-            align-items: center;
-            font-weight: 500;
-        }
-
-        .gantt-timeline-cell {
-            position: relative;
-            height: 50px;
-            border-right: 1px solid #e2e8f0;
-        }
-
-        .timeline-bar {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            height: 24px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 11px;
-            font-weight: 500;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            z-index: 2;
-        }
-
-        .task-discovery { background: #3b82f6; }
-        .task-planning { background: #8b5cf6; }
-        .task-execution { background: #10b981; }
-        .task-completed { background: #6b7280; }
-
-        .risk-item {
-            display: flex;
-            align-items: center;
-            padding: 15px;
-            background: #fef2f2;
-            border-left: 4px solid #ef4444;
-            margin-bottom: 10px;
-            border-radius: 8px;
-        }
-
-        .risk-high { border-left-color: #ef4444; background: #fef2f2; }
-        .risk-medium { border-left-color: #f59e0b; background: #fffbeb; }
-        .risk-low { border-left-color: #10b981; background: #f0fdf4; }
-
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-        }
-
-        .team-card {
+        .decision-card {
             background: white;
-            padding: 20px;
+            border: 2px solid #e2e8f0;
             border-radius: 12px;
+            padding: 30px;
             text-align: center;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            border: 1px solid #e2e8f0;
-        }
-
-        .team-avatar {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            margin: 0 auto 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 700;
-            font-size: 1.5em;
-        }
-
-        .deliverable-item {
-            padding: 15px;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            background: white;
-        }
-
-        .deliverable-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 8px;
-        }
-
-        .deliverable-title {
-            font-weight: 600;
-            color: #1e293b;
-        }
-
-        .deliverable-status {
-            padding: 4px 8px;
-            border-radius: 12px;
-            font-size: 12px;
-            font-weight: 500;
-        }
-
-        .status-completed { background: #dcfce7; color: #166534; }
-        .status-inprogress { background: #dbeafe; color: #1e40af; }
-        .status-pending { background: #fef3c7; color: #92400e; }
-
-        .zoom-controls {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .zoom-btn {
-            background: #667eea;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            margin: 0 5px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 500;
             transition: all 0.3s ease;
-        }
-
-        .zoom-btn:hover {
-            background: #5a67d8;
-            transform: translateY(-2px);
-        }
-
-        .current-date {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: #ef4444;
-            z-index: 10;
-            pointer-events: none;
-        }
-
-        .date-indicator {
-            position: absolute;
-            top: -25px;
-            left: -15px;
-            background: #ef4444;
-            color: white;
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-size: 10px;
-            font-weight: 600;
-            white-space: nowrap;
-        }
-
-        .gantt-grid {
+            cursor: pointer;
             position: relative;
+        }
+
+        .decision-card:hover {
+            border-color: #667eea;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.2);
+        }
+
+        .decision-card.recommended {
+            border-color: #10b981;
+            background: #f0fdf4;
+        }
+
+        .decision-card.recommended::before {
+            content: "RECOMMENDED";
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #10b981;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border-left: 5px solid #667eea;
+        }
+
+        .project-card.project-two {
+            border-left-color: #10b981;
+        }
+
+        .timeline-container {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 20px 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid #e2e8f0;
+            position: relative;
+        }
+
+        .timeline-item:last-child {
+            border-bottom: none;
+        }
+
+        .timeline-item::before {
+            content: '';
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #667eea;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+
+        .timeline-content {
+            flex: 1;
+        }
+
+        .timeline-week {
+            font-weight: bold;
+            color: #667eea;
+            font-size: 0.9em;
+            text-transform: uppercase;
+        }
+
+        .timeline-title {
+            font-size: 1.2em;
+            font-weight: 600;
+            margin: 5px 0;
+        }
+
+        .timeline-desc {
+            color: #64748b;
+            font-size: 0.9em;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, #1e40af, #3730a3);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            border-radius: 12px;
+            margin: 30px 0;
+        }
+
+        .cta-button {
+            background: #10b981;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0 10px;
+        }
+
+        .cta-button:hover {
+            background: #059669;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.4);
+        }
+
+        .cta-button.secondary {
+            background: transparent;
+            border: 2px solid white;
+        }
+
+        .cta-button.secondary:hover {
+            background: white;
+            color: #1e40af;
+        }
+
+        .value-list {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .value-list li {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            padding: 10px;
+            background: #f8fafc;
+            border-radius: 8px;
+        }
+
+        .value-list li::before {
+            content: '✅';
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+
+        .roi-highlight {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .roi-number {
+            font-size: 3em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .decision-cards, .project-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .nav-tabs {
+                flex-direction: column;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .status-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <!-- Header -->
         <div class="header">
-            <h1>6-Week Branding and Marketing Sprint</h1>
-            <p>Project Portal for Stakeholder Review</p>
+            <h1>Phase 2 Strategic Growth</h1>
+            <p>Building on Phase 1 success to capture the 6-12 month market opportunity</p>
         </div>
 
+        <!-- Decision Bar -->
+        <div class="decision-bar">
+            ⚡ DECISION REQUIRED: January 12, 2026 start • Investment: $60K-$80K • Expected ROI: 400-600%
+        </div>
+
+        <!-- Status Overview -->
+        <div class="status-grid">
+            <div class="status-card">
+                <div class="status-number" style="color: #667eea;">18</div>
+                <div class="status-label">Weeks Duration</div>
+            </div>
+            <div class="status-card">
+                <div class="status-number" style="color: #10b981;">400-600%</div>
+                <div class="status-label">Expected ROI</div>
+            </div>
+            <div class="status-card">
+                <div class="status-number" style="color: #f59e0b;">2</div>
+                <div class="status-label">Concurrent Projects</div>
+            </div>
+            <div class="status-card">
+                <div class="status-number" style="color: #ef4444;">3</div>
+                <div class="status-label">Days to Decision</div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
         <div class="nav-tabs">
-            <button class="nav-tab active" onclick="showTab('overview')">Overview</button>
-            <button class="nav-tab" onclick="showTab('timeline')">Timeline</button>
-            <button class="nav-tab" onclick="showTab('deliverables')">Documents</button>
-            <button class="nav-tab" onclick="showTab('risks')">Risks</button>
+            <button class="nav-tab active" onclick="showTab('overview')">📊 Overview</button>
+            <button class="nav-tab" onclick="showTab('projects')">🚀 Projects</button>
+            <button class="nav-tab" onclick="showTab('timeline')">📅 Timeline</button>
+            <button class="nav-tab" onclick="showTab('decision')">✅ Decision</button>
         </div>
 
+        <!-- Overview Tab -->
         <div id="overview" class="tab-content active">
-            <div class="status-grid">
-                <div class="status-card">
-                    <div class="status-number" style="color: #10b981;">~10%</div>
-                    <div class="status-label">Overall Progress</div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 10%;"></div>
-                    </div>
-                </div>
-                <div class="status-card">
-                    <div class="status-number" style="color: #3b82f6;">3</div>
-                    <div class="status-label">Tasks Completed</div>
-                </div>
-                <div class="status-card">
-                    <div class="status-number" style="color: #f59e0b;">5</div>
-                    <div class="status-label">In Progress</div>
-                </div>
-                <div class="status-card">
-                    <div class="status-number" style="color: #ef4444;">2</div>
-                    <div class="status-label">High Priority Risks</div>
-                </div>
-            </div>
-
             <div class="card">
-                <h3>Project Summary</h3>
-                <p><strong>Objective:</strong> To refine the existing brand identity, produce a complete set of consistent marketing assets, and develop an AI-powered system for content distribution to ensure the team is fully prepared for the mid-November overseas trip.</p>
-                <p><strong>Timeline:</strong> October 3, 2025 - November 13, 2025 (6 Weeks)</p>
-                <p><strong>Key Stakeholders:</strong> James Emery (Vision), Helena Emery (Creative), Isabelle Emery (Process/AI)</p>
-            </div>
-
-            <div class="card">
-                <h3>Key Milestones</h3>
-                <div class="deliverable-item">
-                    <div class="deliverable-header">
-                        <div class="deliverable-title">✅ Sprint Plan Approved</div>
-                        <span class="deliverable-status status-completed">Completed</span>
-                    </div>
-                    <p>Detailed project scope, schedule, and initial WBS approved by all stakeholders.</p>
-                </div>
-                <div class="deliverable-item">
-                    <div class="deliverable-header">
-                        <div class="deliverable-title">🔄 Brand Style Guide & Templates</div>
-                        <span class="deliverable-status status-inprogress">In Progress</span>
-                    </div>
-                    <p>Refined brand guidelines and master templates for all marketing assets under development.</p>
-                </div>
-                <div class="deliverable-item">
-                    <div class="deliverable-header">
-                        <div class="deliverable-title">⏳ AI Tool PoC Complete</div>
-                        <span class="deliverable-status status-pending">Pending</span>
-                    </div>
-                    <p>Proof of Concept for the AI content distribution tool to be completed by end of Week 2.</p>
-                </div>
-            </div>
-        </div>
-
-        <div id="timeline" class="tab-content">
-            <div class="card">
-                <h3>Project Timeline (Gantt Chart)</h3>
-                <div class="gantt-container">
-                    <div class="gantt-chart">
-                        <div class="gantt-grid">
-                            <div class="gantt-header">
-                                <div class="gantt-task-name">Phase / Task</div>
-                                <div class="gantt-week">Oct W1</div>
-                                <div class="gantt-week">Oct W2</div>
-                                <div class="gantt-week">Oct W3</div>
-                                <div class="gantt-week">Oct W4</div>
-                                <div class="gantt-week">Nov W1</div>
-                                <div class="gantt-week">Nov W2</div>
-                                <div class="gantt-week">Nov W3</div>
-                            </div>
-                            
-                            <!-- Gantt Chart Rows -->
-                            <div class="gantt-row">
-                                <div class="gantt-task-cell">**1.0 Project Management**</div>
-                                <div class="gantt-timeline-cell"><div class="timeline-bar task-planning" style="left: 0%; width: 100%;"></div></div>
-                                <div class="gantt-timeline-cell"><div class="timeline-bar task-planning" style="left: 0%; width: 100%;"></div></div>
-                                <div class="gantt-timeline-cell"><div class="timeline-bar task-planning" style="left: 0%; width: 100%;"></div></div>
-                                <div class="gantt-timeline-cell"><div class="timeline-bar task-planning" style="left: 0%; width: 100%;"></div></div>
-                                <div class="gantt-timeline-cell"><div class="timeline-bar task-planning" style="left: 0%; width: 100%;"></div></div>
-                                <div class="gantt-timeline-cell"><div class="timeline-bar task-planning" style="left: 0%; width: 100%;"></div></div>
-                                <div class="gantt-timeline-cell"><div class="timeline-bar task-planning" style="left: 0%; width: 100%;"></div></div>
-                            </div>
-                            <div class="gantt-row">
-                                <div class="gantt-task-cell">1.1 Project Planning</div>
-                                <div class="gantt-timeline-cell"><div class="timeline-bar task-completed" style="left: 0%; width: 80%;"></div></div>
-                                <div class="gantt-timeline-cell"></div>
-                                <div class="gantt-timeline-cell"></div>
-                                <div class="gantt-timeline-cell"></div>
-                                <div class="gantt-timeline-cell"></div>
-                                <div class="gantt-timeline-cell"></div>
-                                <div class="gantt-timeline-cell"></div>
-                            </div>
-                            <div class="gantt-row">
-                                <div class="gantt-task-cell">1.2 Project Tracking & Comm.</div>
-                                <div class="gantt-timeline-cell"><div class="timeline-bar task-execution" style="left: 80%; width: 20%;"></div></div>
-                                <div class="gantt-timeline-cell"><div class="timeline-bar task-execution" style="left: 0%; width: 100%;"></div></div>
-                                <div class="gantt-timeline-cell"><div class="timeline-bar task-execution" style="left: 0%; width: 100%;"></div></div>
-                                <div class="gantt-timeline-cell"><div class="timeline-bar task-execution" style="left: 0%; width: 100%;"></div></div>
-                                <div class="gantt-timeline-cell"><div class="timeline-bar task-execution" style="left: 0%; width: 100%;"></div></div>
-                                <div class="gantt-timeline-cell"><div class="timeline-bar task-execution" style="left: 0%; width: 100%;"></div></div>
-                                <div class="gantt-timeline-cell"><div class="timeline-bar task-execution" style="left: 0%; width: 60%;"></div></div>
-                            </div>
-                            <div class="gantt-row">
-                                <div class="gantt-task-cell">1.3 Project Handoff</div>
-                                <div class="gantt-timeline-cell"></div>
-                                <div class="gantt-timeline-cell"></div>
-                                <div class="gantt-timeline-cell"></div>
-                                <div class="gantt-timeline-cell"></div>
-                                <div class="gantt-timeline-cell"></div>
-                                <div class="gantt-timeline-cell"><div class="timeline-bar task-planning" style="left: 80%; width: 20%;"></div></div>
-                                <div class="gantt-timeline-cell"><div class="timeline-bar task-planning" style="left: 0%; width: 40%;"></div></div>
-                            </div>
-
-                            <div class="gantt-row">
-                                <div class="gantt-task-cell">**2.0 Brand Refinement**</div>
-                                <div class="gantt-timeline-cell"><div class="timeline-bar task-planning" style="left: 0%; width: 100%;"></div></div>
-                                <div class="gantt-timeline-cell"><div class="timeline-bar task-planning" style="left: 0%; width: 100%;"></div></div>
-                                <div class="gantt-timeline-cell"><div class="timeline-bar task-planning" style="left: 0%; width: 100%;"></div></div>
-                                <div class="gantt-timeline-cell"><div class="timeline-bar task-planning" style="left: 0%; width: 100%;"></div></div>
-                                <div class="gantt-timeline-cell"><div class="timeline-bar task-planning" style="left: 0%; width: 100%;"></div></div>
-                                <div class="gantt-timeline-cell"><div class="timeline-bar task-planning" style="left: 0%; width: 100%;"></div></div>
-                                <div class="gantt-timeline-cell"><div class="timeline-bar task-planning" style="left: 0%; width: 100%;"></div></div>
-                            </div>
-                            <div class="gantt-row">
-                                <div class="gantt-task-cell">2.1 Brand Discovery</div>
-                                <div class="gantt-timeline-cell"><div class="timeline-bar task-completed" style="left: 80%; width: 20%;"></div></div>
-                                <div class="gantt-timeline-cell"><div class="timeline-bar task-completed" style="left: 0%; width: 20%;"></div></div>
-                                <div class="gantt-timeline-cell"></div>
-                                <div class="gantt-timeline-cell"></div>
-                                <div class="gantt-timeline-cell"></div>
-                                <div class="gantt-timeline-cell"></div>
-                                <div class="gantt-timeline-cell"></div>
-                            </div>
-                            <div class="gantt-row">
-                                <div class="gantt-task-cell">2.2 Style Guide & Templates</div>
-                                <div class="gantt-timeline-cell"></div>
-                                <div class="gantt-timeline-cell"><div class="timeline-bar task-execution" style="left: 60%; width: 40%;"></div></div>
-                                <div class="gantt-timeline-cell"><div class="timeline-bar task-execution" style="left: 0%; width: 100%;"></div></div>
-                                <div class="gantt-timeline-cell"><div class="timeline-bar task-execution" style="left: 0%; width: 20%;"></div></div>
-                                <div class="gantt-timeline-cell"></div>
-                                <div class="gantt-timeline-cell"></div>
-                                <div class="gantt-timeline-cell"></div>
-                            </div>
-
-                            <div class="gantt-row">
-                                <div class="gantt-task-cell">**3.0 Marketing Asset Production**</div>
-                                <div class="gantt-timeline-cell"></div>
-                                <div class="gantt-timeline-cell"></div>
-                                <div class="gantt-timeline-cell"><div class="timeline-bar task-planning" style="left: 0%; width: 100%;"></div></div>
-                                <div class="gantt-timeline-cell"><div class="timeline-bar task-planning" style="left: 0%; width: 100%;"></div></div>
-                                <div class="gantt-timeline-cell"><div class="timeline-bar task-planning" style="left: 0%; width: 100%;"></div></div>
-                                <div class="gantt-timeline-cell"><div class="timeline-bar task-planning" style="left: 0%; width: 100%;"></div></div>
-                                <div class="gantt-timeline-cell"><div class="timeline-bar task-planning" style="left: 0%; width: 100%;"></div></div>
-                            </div>
-                            <div class="gantt-row">
-                                <div class="gantt-task-cell">3.1 Content & Design</div>
-                                <div class="gantt-timeline-cell"></div>
-                                <div class="gantt-timeline-cell"></div>
-                                <div class="gantt-timeline-cell"><div class="timeline-bar task-execution" style="left: 40%; width: 60%;"></div></div>
-                                <div class="gantt-timeline-cell"><div class="timeline-bar task-execution" style="left: 0%; width: 100%;"></div></div>
-                                <div class="gantt-timeline-cell"><div class="timeline-bar task-execution" style="left: 0%; width: 80%;"></div></div>
-                                <div class="gantt-timeline-cell"></div>
-                                <div class="gantt-timeline-cell"></div>
-                            </div>
-                            <div class="gantt-row">
-                                <div class="gantt-task-cell">3.2 Review and Finalization</div>
-                                <div class="gantt-timeline-cell"></div>
-                                <div class="gantt-timeline-cell"></div>
-                                <div class="gantt-timeline-cell"></div>
-                                <div class="gantt-timeline-cell"></div>
-                                <div class="gantt-timeline-cell"><div class="timeline-bar task-planning" style="left: 80%; width: 20%;"></div></div>
-                                <div class="gantt-timeline-cell"><div class="timeline-bar task-planning" style="left: 0%; width: 100%;"></div></div>
-                                <div class="gantt-timeline-cell"><div class="timeline-bar task-planning" style="left: 0%; width: 20%;"></div></div>
-                            </div>
-
-                            <div class="gantt-row">
-                                <div class="gantt-task-cell">**4.0 AI Content Distribution Tool**</div>
-                                <div class="gantt-timeline-cell"><div class="timeline-bar task-planning" style="left: 0%; width: 100%;"></div></div>
-                                <div class="gantt-timeline-cell"><div class="timeline-bar task-planning" style="left: 0%; width: 100%;"></div></div>
-                                <div class="gantt-timeline-cell"><div class="timeline-bar task-planning" style="left: 0%; width: 100%;"></div></div>
-                                <div class="gantt-timeline-cell"><div class="timeline-bar task-planning" style="left: 0%; width: 100%;"></div></div>
-                                <div class="gantt-timeline-cell"><div class="timeline-bar task-planning" style="left: 0%; width: 100%;"></div></div>
-                                <div class="gantt-timeline-cell"><div class="timeline-bar task-planning" style="left: 0%; width: 100%;"></div></div>
-                                <div class="gantt-timeline-cell"><div class="timeline-bar task-planning" style="left: 0%; width: 100%;"></div></div>
-                            </div>
-                            <div class="gantt-row">
-                                <div class="gantt-task-cell">4.1 Scoping and Prototyping</div>
-                                <div class="gantt-timeline-cell"><div class="timeline-bar task-completed" style="left: 80%; width: 20%;"></div></div>
-                                <div class="gantt-timeline-cell"><div class="timeline-bar task-completed" style="left: 0%; width: 100%;"></div></div>
-                                <div class="gantt-timeline-cell"><div class="timeline-bar task-completed" style="left: 0%; width: 40%;"></div></div>
-                                <div class="gantt-timeline-cell"></div>
-                                <div class="gantt-timeline-cell"></div>
-                                <div class="gantt-timeline-cell"></div>
-                                <div class="gantt-timeline-cell"></div>
-                            </div>
-                            <div class="gantt-row">
-                                <div class="gantt-task-cell">4.2 Development & Testing</div>
-                                <div class="gantt-timeline-cell"></div>
-                                <div class="gantt-timeline-cell"><div class="timeline-bar task-execution" style="left: 0%; width: 100%;"></div></div>
-                                <div class="gantt-timeline-cell"><div class="timeline-bar task-execution" style="left: 0%; width: 100%;"></div></div>
-                                <div class="gantt-timeline-cell"><div class="timeline-bar task-execution" style="left: 0%; width: 100%;"></div></div>
-                                <div class="gantt-timeline-cell"><div class="timeline-bar task-execution" style="left: 0%; width: 100%;"></div></div>
-                                <div class="gantt-timeline-cell"><div class="timeline-bar task-execution" style="left: 0%; width: 60%;"></div></div>
-                                <div class="gantt-timeline-cell"></div>
-                            </div>
-                            <div class="gantt-row">
-                                <div class="gantt-task-cell">4.3 Deployment & Handoff</div>
-                                <div class="gantt-timeline-cell"></div>
-                                <div class="gantt-timeline-cell"></div>
-                                <div class="gantt-timeline-cell"></div>
-                                <div class="gantt-timeline-cell"></div>
-                                <div class="gantt-timeline-cell"><div class="timeline-bar task-planning" style="left: 80%; width: 20%;"></div></div>
-                                <div class="gantt-timeline-cell"><div class="timeline-bar task-planning" style="left: 0%; width: 100%;"></div></div>
-                                <div class="gantt-timeline-cell"><div class="timeline-bar task-planning" style="left: 0%; width: 40%;"></div></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="deliverables" class="tab-content">
-            <div class="card">
-                <h3>Project Documents</h3>
-                <div class="deliverable-item">
-                    <div class="deliverable-header">
-                        <div class="deliverable-title"><a href="sprint-checklists-W1-W2.md">Sprint Checklists (Week 1 & 2)</a></div>
-                        <span class="deliverable-status status-completed">Completed</span>
-                    </div>
-                    <p>Detailed task checklists for each stakeholder for the initial sprint weeks.</p>
-                </div>
-                <div class="deliverable-item">
-                    <div class="deliverable-header">
-                        <div class="deliverable-title"><a href="project-overview.md">Project Overview</a></div>
-                        <span class="deliverable-status status-completed">Completed</span>
-                    </div>
-                    <p>High-level summary of project scope, objectives, and stakeholders.</p>
-                </div>
-                <div class="deliverable-item">
-                    <div class="deliverable-header">
-                        <div class="deliverable-title"><a href="WBS.md">Work Breakdown Structure (WBS)</a></div>
-                        <span class="deliverable-status status-completed">Completed</span>
-                    </div>
-                    <p>Detailed breakdown of project tasks, durations, and dependencies.</p>
-                </div>
-                <div class="deliverable-item">
-                    <div class="deliverable-header">
-                        <div class="deliverable-title"><a href="risk-management-plan.md">Risk Management Plan</a></div>
-                        <span class="deliverable-status status-completed">Completed</span>
-                    </div>
-                    <p>Identification, analysis, and mitigation strategies for potential project risks.</p>
-                </div>
-                <div class="deliverable-item">
-                    <div class="deliverable-header">
-                        <div class="deliverable-title"><a href="gantt-chart.csv">Gantt Chart Data (CSV)</a></div>
-                        <span class="deliverable-status status-completed">Completed</span>
-                    </div>
-                    <p>Raw data for the project timeline visualization.</p>
-                </div>
-                <div class="deliverable-item">
-                    <div class="deliverable-header">
-                        <div class="deliverable-title"><a href="dashboard.py">Streamlit Dashboard App</a></div>
-                        <span class="deliverable-status status-completed">Completed</span>
-                    </div>
-                    <p>Python script for the interactive project dashboard (run locally).</p>
-                </div>
-            </div>
-        </div>
-
-        <div id="risks" class="tab-content">
-            <div class="card">
-                <h3>Risk Assessment & Mitigation</h3>
+                <h3>What We're Building Together</h3>
+                <p style="margin-bottom: 20px;">Following exceptional Phase 1 results (21 deliverables completed), EMI is positioned to capture a critical market opportunity window. Phase 2 delivers both immediate wins and long-term strategic systems.</p>
                 
-                <div class="risk-item risk-high">
-                    <div>
-                        <h4>🔴 High Priority: R-01 Scope Creep (AI Tool)</h4>
-                        <p>Risk that the scope of the AI tool expands beyond initial requirements, causing development delays.</p>
-                        <p><strong>Mitigation:</strong> Strictly adhere to the initial requirements document. All change requests must go through a formal approval process with James.</p>
+                <div class="project-grid">
+                    <div class="project-card">
+                        <h4 style="color: #667eea; margin-bottom: 15px;">🚀 Project One: Immediate Wins</h4>
+                        <p><strong>6 weeks</strong> • Get conference-ready and distribution-enabled</p>
+                        <ul class="value-list" style="margin-top: 15px;">
+                            <li>Updated sales materials for immediate use</li>
+                            <li>Complete distributor enablement packages</li>
+                            <li>Conference presentation materials</li>
+                            <li>Quick brand consistency improvements</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="project-card project-two">
+                        <h4 style="color: #10b981; margin-bottom: 15px;">🏗️ Project Two: Strategic Foundation</h4>
+                        <p><strong>18 weeks</strong> • Long-term systems and market expansion</p>
+                        <ul class="value-list" style="margin-top: 15px;">
+                            <li>AI-powered tools and automation</li>
+                            <li>Industry authority positioning</li>
+                            <li>Complete export market framework</li>
+                            <li>Integrated brand toolkit system</li>
+                        </ul>
                     </div>
                 </div>
-                <div class="risk-item risk-medium">
-                    <div>
-                        <h4>🟡 Medium Priority: R-02 Conflicting Feedback (Creative Assets)</h4>
-                        <p>Conflicting feedback from stakeholders on creative assets leads to endless revision cycles and delays.</p>
-                        <p><strong>Mitigation:</strong> Implement a structured review process with a single point of contact (Helena) for consolidating feedback. James to be the final arbiter on conflicting feedback.</p>
+
+                <div class="roi-highlight">
+                    <div class="roi-number">400-600%</div>
+                    <p>Expected ROI within 12-18 months based on conference opportunities</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Building on Phase 1 Success</h3>
+                <ul class="value-list">
+                    <li><strong>21 Major Deliverables Completed</strong> - Complete brand foundation established</li>
+                    <li><strong>Conference Success</strong> - STC Hong Kong, Dr. Kewach Thailand, Setinge ASEAN partnerships</li>
+                    <li><strong>Confirmed Sales</strong> - $50K+ robotic lifting rack opportunity ready</li>
+                    <li><strong>Market Positioning</strong> - 6-12 month competitive advantage window</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Projects Tab -->
+        <div id="projects" class="tab-content">
+            <div class="card">
+                <h3>Dual Project Approach</h3>
+                <p style="margin-bottom: 30px;">Two concurrent projects running in parallel to maximize efficiency and deliver both immediate results and long-term transformation.</p>
+
+                <div class="project-grid">
+                    <div class="project-card">
+                        <h4 style="color: #667eea; margin-bottom: 15px;">Project One Details</h4>
+                        <p><strong>Weeks 1-6 | $15K-$20K</strong></p>
+                        <ul style="margin: 15px 0; padding-left: 20px;">
+                            <li>Project initiation and AI audits</li>
+                            <li>Brand strategy development</li>
+                            <li>Distributor documentation system</li>
+                            <li>PowerPoint integration platform</li>
+                            <li>Internal training and handover</li>
+                        </ul>
+                        <p style="font-weight: 600; color: #667eea;">Immediate client materials ready within 6 weeks</p>
+                    </div>
+
+                    <div class="project-card project-two">
+                        <h4 style="color: #10b981; margin-bottom: 15px;">Project Two Details</h4>
+                        <p><strong>Weeks 2-18 | $45K-$60K</strong></p>
+                        <ul style="margin: 15px 0; padding-left: 20px;">
+                            <li>Customer experience optimization</li>
+                            <li>AI tools development and integration</li>
+                            <li>Industry authority and thought leadership</li>
+                            <li>Advanced customer research and personas</li>
+                            <li>Complete brand and marketing toolkit</li>
+                            <li>Export framework and market expansion</li>
+                        </ul>
+                        <p style="font-weight: 600; color: #10b981;">Complete transformation and scale readiness</p>
                     </div>
                 </div>
-                <div class="risk-item risk-medium">
-                    <div>
-                        <h4>🟡 Medium Priority: R-03 Content Bottlenecks</h4>
-                        <p>The creation of content (copywriting) for the marketing assets takes longer than anticipated, creating a bottleneck for the design phase.</p>
-                        <p><strong>Mitigation:</strong> Dedicate a resource to content creation early in the project. Write the copy for the most critical assets first.</p>
+            </div>
+
+            <div class="card">
+                <h3>Strategic Value Delivered</h3>
+                <div class="status-grid">
+                    <div class="status-card">
+                        <div style="font-size: 1.5em; margin-bottom: 10px;">📈</div>
+                        <div style="font-weight: 600;">Revenue Growth</div>
+                        <div style="color: #64748b; font-size: 0.9em;">STC, Dr. Kewach, Setinge opportunities</div>
+                    </div>
+                    <div class="status-card">
+                        <div style="font-size: 1.5em; margin-bottom: 10px;">⚡</div>
+                        <div style="font-weight: 600;">Efficiency</div>
+                        <div style="color: #64748b; font-size: 0.9em;">50% reduction in manual tasks</div>
+                    </div>
+                    <div class="status-card">
+                        <div style="font-size: 1.5em; margin-bottom: 10px;">🎯</div>
+                        <div style="font-weight: 600;">Market Position</div>
+                        <div style="color: #64748b; font-size: 0.9em;">6-12 month competitive advantage</div>
+                    </div>
+                    <div class="status-card">
+                        <div style="font-size: 1.5em; margin-bottom: 10px;">🌍</div>
+                        <div style="font-weight: 600;">Global Ready</div>
+                        <div style="color: #64748b; font-size: 0.9em;">Export framework and systems</div>
                     </div>
                 </div>
-                <div class="risk-item risk-low">
-                    <div>
-                        <h4>🟢 Low Priority: R-04 External Printing Delays</h4>
-                        <p>Delays from the external printing vendor jeopardize the availability of physical assets for the trip.</p>
-                        <p><strong>Mitigation:</strong> Select the printing vendor and get production timelines in Week 2. Submit final files with at least 3 buffer days before the vendor's deadline.</p>
+            </div>
+        </div>
+
+        <!-- Timeline Tab -->
+        <div id="timeline" class="tab-content">
+            <div class="timeline-container">
+                <h3 style="margin-bottom: 30px;">Project Timeline & Milestones</h3>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-week">Weeks 1-6: Project One</div>
+                        <div class="timeline-title">Immediate Client Updates</div>
+                        <div class="timeline-desc">Updated materials, distributor packages, conference readiness</div>
                     </div>
                 </div>
-                <div class="risk-item risk-low">
-                    <div>
-                        <h4>🟢 Low Priority: R-05 Team Member Unavailability</h4>
-                        <p>A key team member (Helena or Isabelle) becomes unavailable due to illness or other unforeseen circumstances.</p>
-                        <p><strong>Mitigation:</strong> Ensure all project documentation and work-in-progress is stored in a central, accessible location. Cross-train a backup resource on the basics of the AI tool.</p>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-week">Weeks 2-8: Foundation</div>
+                        <div class="timeline-title">Strategic Systems Development</div>
+                        <div class="timeline-desc">AI framework, documentation systems, brand integration</div>
                     </div>
                 </div>
-                <div class="risk-item risk-low">
-                    <div>
-                        <h4>🟢 Low Priority: R-06 AI Tool Bugs/Adoption</h4>
-                        <p>The final AI tool has critical bugs or is not adopted by the team due to a poor user experience.</p>
-                        <p><strong>Mitigation:</strong> Conduct thorough User Acceptance Testing (UAT) in Week 5. Create a simple user guide and hold a training session.</p>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-week">Weeks 9-14: Authority</div>
+                        <div class="timeline-title">Industry Leadership & Research</div>
+                        <div class="timeline-desc">Thought leadership, customer insights, market intelligence</div>
                     </div>
                 </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-week">Weeks 15-18: Integration</div>
+                        <div class="timeline-title">Complete System Integration</div>
+                        <div class="timeline-desc">Brand toolkit, export framework, training & handover</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Critical Decision Gates</h3>
+                <div class="status-grid">
+                    <div class="status-card">
+                        <div style="font-size: 1.8em; margin-bottom: 10px; color: #667eea;">🚦</div>
+                        <div style="font-weight: 600;">Gate 1: Week 3</div>
+                        <div style="color: #64748b; font-size: 0.9em;">Brand strategy approved</div>
+                    </div>
+                    <div class="status-card">
+                        <div style="font-size: 1.8em; margin-bottom: 10px; color: #10b981;">🚦</div>
+                        <div style="font-weight: 600;">Gate 2: Week 6</div>
+                        <div style="color: #64748b; font-size: 0.9em;">Project One complete</div>
+                    </div>
+                    <div class="status-card">
+                        <div style="font-size: 1.8em; margin-bottom: 10px; color: #f59e0b;">🚦</div>
+                        <div style="font-weight: 600;">Gate 3: Week 12</div>
+                        <div style="color: #64748b; font-size: 0.9em;">AI tools operational</div>
+                    </div>
+                    <div class="status-card">
+                        <div style="font-size: 1.8em; margin-bottom: 10px; color: #ef4444;">🚦</div>
+                        <div style="font-weight: 600;">Gate 4: Week 18</div>
+                        <div style="color: #64748b; font-size: 0.9em;">Complete handover</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Decision Tab -->
+        <div id="decision" class="tab-content">
+            <div class="card">
+                <h3>Your Decision Options</h3>
+                
+                <div class="decision-cards">
+                    <div class="decision-card recommended">
+                        <h4 style="margin-bottom: 20px;">✅ Full Strategic Package</h4>
+                        <div style="font-size: 2em; margin: 20px 0; color: #10b981; font-weight: bold;">$60K-$80K</div>
+                        <p><strong>18 weeks • Both Projects</strong></p>
+                        <ul style="text-align: left; margin: 20px 0; padding-left: 20px;">
+                            <li>Immediate client materials (6 weeks)</li>
+                            <li>Complete AI tool development</li>
+                            <li>Industry authority positioning</li>
+                            <li>Export market framework</li>
+                            <li>Full system integration</li>
+                        </ul>
+                        <p style="color: #10b981; font-weight: 600;">Maximum ROI • Complete transformation</p>
+                    </div>
+                    
+                    <div class="decision-card">
+                        <h4 style="margin-bottom: 20px;">⚡ Quick Wins Only</h4>
+                        <div style="font-size: 2em; margin: 20px 0; color: #667eea; font-weight: bold;">$15K-$20K</div>
+                        <p><strong>6 weeks • Project One</strong></p>
+                        <ul style="text-align: left; margin: 20px 0; padding-left: 20px;">
+                            <li>Updated sales materials</li>
+                            <li>Distributor packages</li>
+                            <li>Conference materials</li>
+                            <li>Basic brand updates</li>
+                            <li>PowerPoint integration</li>
+                        </ul>
+                        <p style="color: #ef4444; font-weight: 600;">Limited scope • No long-term systems</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" style="background: #f0fdf4; border-color: #10b981;">
+                <h3 style="color: #059669;">Why Full Package is Recommended</h3>
+                <ul class="value-list">
+                    <li><strong>Strategic Timing:</strong> 6-12 month market opportunity window requires comprehensive execution</li>
+                    <li><strong>ROI Multiplication:</strong> Immediate wins fund long-term systems, AI tools accelerate growth</li>
+                    <li><strong>Conference Momentum:</strong> Must capitalize on current STC, Dr. Kewach, and Setinge relationships</li>
+                    <li><strong>Operational Scale:</strong> Complete systems integration ensures EMI operates efficiently at scale</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Call to Action -->
+        <div class="cta-section">
+            <h2 style="margin-bottom: 20px;">Ready to Move Forward?</h2>
+            <p style="margin-bottom: 30px; font-size: 1.1em;">Start January 12, 2026 • Immediate results within 6 weeks • Complete transformation in 18 weeks</p>
+            
+            <button class="cta-button" onclick="approveProject()">
+                YES - Full Package ($60K-$80K)
+            </button>
+            
+            <button class="cta-button secondary" onclick="askQuestions()">
+                I Have Questions
+            </button>
+            
+            <div style="margin-top: 30px; font-size: 0.9em; opacity: 0.9;">
+                <p>📞 Questions? Call Lisa directly</p>
+                <p>📧 Email: lisa@successsherpa.com</p>
+                <p>⏰ Decision required by January 10, 2026</p>
             </div>
         </div>
     </div>
 
     <script>
-        function showTab(tabName) {
+        function showTab(tabId) {
             // Hide all tab contents
-            const contents = document.querySelectorAll('.tab-content');
-            contents.forEach(content => content.classList.remove('active'));
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => content.classList.remove('active'));
             
-            // Remove active class from all tabs
-            const tabs = document.querySelectorAll('.nav-tab');
-            tabs.forEach(tab => tab.classList.remove('active'));
+            // Remove active class from all nav tabs
+            const navTabs = document.querySelectorAll('.nav-tab');
+            navTabs.forEach(tab => tab.classList.remove('active'));
             
             // Show selected tab content
-            document.getElementById(tabName).classList.add('active');
+            document.getElementById(tabId).classList.add('active');
             
-            // Add active class to clicked tab
+            // Add active class to clicked nav tab
             event.target.classList.add('active');
         }
 
-        // Function to generate Gantt chart rows dynamically
-        function generateGanttChart() {
-            const ganttGrid = document.querySelector('.gantt-grid');
-            const projectStartDate = new Date('2025-10-03');
-            const projectEndDate = new Date('2025-11-13');
-            const totalProjectDays = (projectEndDate - projectStartDate) / (1000 * 60 * 60 * 24);
-            const totalWeeks = Math.ceil(totalProjectDays / 7);
-
-            // Example data from gantt-chart.csv (simplified for static display)
-            const ganttData = [
-                { level: 2, name: "**1.0 Project Management**", start: "2025-10-03", end: "2025-11-13", type: "task-planning" },
-                { level: 3, name: "1.1 Project Planning", start: "2025-10-03", end: "2025-10-08", type: "task-completed" },
-                { level: 3, name: "1.2 Project Tracking & Comm.", start: "2025-10-09", end: "2025-11-13", type: "task-execution" },
-                { level: 3, name: "1.3 Project Handoff", start: "2025-11-12", end: "2025-11-13", type: "task-planning" },
-
-                { level: 2, name: "**2.0 Brand Refinement**", start: "2025-10-09", end: "2025-10-21", type: "task-planning" },
-                { level: 3, name: "2.1 Brand Discovery", start: "2025-10-09", end: "2025-10-10", type: "task-completed" },
-                { level: 3, name: "2.2 Style Guide & Templates", start: "2025-10-13", end: "2025-10-21", type: "task-execution" },
-
-                { level: 2, name: "**3.0 Marketing Asset Production**", start: "2025-10-22", end: "2025-11-11", type: "task-planning" },
-                { level: 3, name: "3.1 Content & Design", start: "2025-10-22", end: "2025-11-04", type: "task-execution" },
-                { level: 3, name: "3.2 Review and Finalization", start: "2025-11-05", end: "2025-11-11", type: "task-planning" },
-
-                { level: 2, name: "**4.0 AI Content Distribution Tool**", start: "2025-10-09", end: "2025-11-12", type: "task-planning" },
-                { level: 3, name: "4.1 Scoping and Prototyping", start: "2025-10-09", end: "2025-10-17", type: "task-completed" },
-                { level: 3, name: "4.2 Development & Testing", start: "2025-10-20", end: "2025-11-05", type: "task-execution" },
-                { level: 3, name: "4.3 Deployment & Handoff", start: "2025-11-06", end: "2025-11-12", type: "task-planning" }
-            ];
-
-            // Generate header weeks
-            let headerWeeksHtml = '<div class="gantt-task-name">Phase / Task</div>';
-            for (let i = 0; i < totalWeeks; i++) {
-                const weekStartDate = new Date(projectStartDate);
-                weekStartDate.setDate(projectStartDate.getDate() + (i * 7));
-                const month = weekStartDate.toLocaleString('default', { month: 'short' });
-                headerWeeksHtml += `<div class="gantt-week">${month} W${i + 1}</div>`;
-            }
-            ganttGrid.querySelector('.gantt-header').innerHTML = headerWeeksHtml;
-
-            ganttData.forEach(task => {
-                const taskStartDate = new Date(task.start);
-                const taskEndDate = new Date(task.end);
-                const taskDurationDays = (taskEndDate - taskStartDate) / (1000 * 60 * 60 * 24);
-
-                const startOffsetDays = (taskStartDate - projectStartDate) / (1000 * 60 * 60 * 24);
-                const leftPercentage = (startOffsetDays / totalProjectDays) * 100;
-                const widthPercentage = (taskDurationDays / totalProjectDays) * 100;
-
-                const row = document.createElement('div');
-                row.classList.add('gantt-row');
-                
-                let taskNameHtml = `<div class="gantt-task-cell">`;
-                if (task.level === 2) {
-                    taskNameHtml += `<strong>${task.name}</strong>`;
-                } else {
-                    taskNameHtml += task.name;
-                }
-                taskNameHtml += `</div>`;
-
-                let timelineCellsHtml = '';
-                for (let i = 0; i < totalWeeks; i++) {
-                    timelineCellsHtml += `<div class="gantt-timeline-cell"></div>`;
-                }
-
-                row.innerHTML = taskNameHtml + timelineCellsHtml;
-
-                const timelineBar = document.createElement('div');
-                timelineBar.classList.add('timeline-bar', task.type);
-                timelineBar.style.left = `${leftPercentage}%`;
-                timelineBar.style.width = `${widthPercentage}%`;
-                timelineBar.textContent = task.name.replace(/\*\*/g, ''); // Remove bold markdown
-
-                // Append the timeline bar to the correct timeline cell
-                // This is a simplification; a more robust solution would place it accurately within the grid
-                const firstTimelineCell = row.querySelector('.gantt-timeline-cell');
-                if (firstTimelineCell) {
-                    firstTimelineCell.appendChild(timelineBar);
-                }
-
-                ganttGrid.appendChild(row);
-            });
+        function approveProject() {
+            window.open('mailto:lisa@successsherpa.com?subject=EMI Phase 2 - APPROVED Full Package&body=Hi Lisa,%0A%0AWe are ready to move forward with the Full Strategic Package for EMI Phase 2.%0A%0APlease send us the contract and schedule our kickoff meeting for January 12, 2026.%0A%0ABest regards,%0AJames, Helena & Isabelle Emery');
         }
 
-        // Initialize progress bars with animation
+        function askQuestions() {
+            window.open('mailto:lisa@successsherpa.com?subject=EMI Phase 2 - Questions&body=Hi Lisa,%0A%0AWe have questions about the EMI Phase 2 proposal. Can we schedule a call to discuss?%0A%0ABest regards,%0AThe Emery Team');
+        }
+
+        // Smooth scrolling and animations
         document.addEventListener('DOMContentLoaded', function() {
-            const progressBars = document.querySelectorAll('.progress-fill');
-            progressBars.forEach(bar => {
-                const width = bar.style.width;
-                bar.style.width = '0%';
-                setTimeout(() => {
-                    bar.style.width = width;
-                }, 500);
-            });
-            generateGanttChart(); // Generate Gantt chart on load
+            // Add entrance animation
+            document.body.style.opacity = '0';
+            setTimeout(() => {
+                document.body.style.transition = 'opacity 0.5s ease-in-out';
+                document.body.style.opacity = '1';
+            }, 100);
+
+            // Update countdown timer
+            function updateCountdown() {
+                const now = new Date();
+                const deadline = new Date('2026-01-10T23:59:59');
+                const timeDiff = deadline - now;
+                const days = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+                
+                const countdownElement = document.querySelector('.status-card:last-child .status-number');
+                if (countdownElement && days >= 0) {
+                    countdownElement.textContent = days;
+                    if (days <= 1) {
+                        countdownElement.style.color = '#ef4444';
+                    }
+                }
+            }
+
+            updateCountdown();
+            setInterval(updateCountdown, 3600000); // Update every hour
         });
     </script>
 </body>

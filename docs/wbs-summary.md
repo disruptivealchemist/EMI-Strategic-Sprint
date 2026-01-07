@@ -157,20 +157,26 @@
 
 ## Budget Allocation by Work Package
 
-### Project One Allocation ($15K-$20K):
+### Project One Allocation ($20K-$25K):
 - WP1 Project Initiation: 15%
 - WP2 Brand Strategy: 30%
 - WP3 Distributor Documentation: 25%
 - WP4 PowerPoint Integration: 20%
 - Project Management & Training: 10%
 
-### Project Two Allocation ($45K-$60K):
-- WP5 Customer Experience: 15%
-- WP6 AI Tools & Automation: 25%
-- WP7 Industry Authority: 20%
-- WP8 Advanced Research: 15%
-- WP9 Brand Toolkit: 15%
-- WP10 Export Framework: 10%
+### Project Two Allocation ($10K per month):
+**Month 1-3 (Guaranteed):** $30K total
+- WP6 Customer Experience: 20%
+- WP7 AI Tools & Development: 30%
+- WP8 Industry Authority: 25%
+- WP9 Advanced Research: 15%
+- Project Management: 10%
+
+**Month 4+ (Flexible):** $10K or $5K per month
+- WP10 Brand Toolkit: Variable scope
+- WP11 Export Framework: Variable scope
+- Ongoing Support & Optimization: Continuous
+- Monthly scope review and adjustment
 
 ## Success Metrics by Phase
 

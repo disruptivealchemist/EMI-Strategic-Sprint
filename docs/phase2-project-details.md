@@ -3,7 +3,7 @@
 ## Project Overview
 
 ### Duration: 18 weeks (January 12 - May 2, 2026)
-### Investment: $60K-$80K
+### Investment: Project 1: $20K-$25K | Project 2: $10K/month (3+ months)
 ### Expected ROI: 400-600% within 12-18 months
 
 ## Dual Project Approach
@@ -124,20 +124,26 @@
 
 ## Investment Breakdown
 
-### Project One: $15K-$20K
+### Project One: $20K-$25K
 - Strategic analysis and planning
 - Brand updates and optimization
 - Distributor documentation
 - PowerPoint integration system
 - Training and handover
 
-### Project Two: $45K-$60K
+### Project Two: $10K per month (3+ months)
 - Custom AI tool development
 - Advanced customer research
 - Industry authority positioning
 - Complete system integration
 - Export framework development
 - Ongoing support and optimization
+
+**Monthly Review Process:**
+- After 3 months, assess deliverables and scope
+- Continue at $10K/month for full development
+- Or adjust to $5K/month for maintenance/lighter scope
+- Flexible scaling based on EMI capacity and priorities
 
 ## Timeline & Milestones
 

@@ -1,0 +1,102 @@
+# .gitignore for EMI-Emery Project
+
+# System Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Python Files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+env.bak/
+venv.bak/
+.pytest_cache/
+
+# Virtual Environment
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE Files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+logs/
+
+# Temporary Files
+*.tmp
+*.temp
+temp/
+tmp/
+
+# Backup Files
+*.bak
+*.backup
+
+# Local Configuration
+config.local.*
+.env.local
+
+# Node modules (if any JavaScript tools used)
+node_modules/
+
+# Build outputs
+dist/
+build/
+*.egg-info/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Excel temporary files
+~$*.xlsx
+~$*.xls
+
+# Word temporary files
+~$*.docx
+~$*.doc
+
+# PowerPoint temporary files
+~$*.pptx
+~$*.ppt
+
+# Large files that shouldn't be in repo
+*.zip
+*.tar.gz
+*.rar
+*.7z
+
+# Sensitive information
+*.key
+*.pem
+*.p12
+credentials.*
+secrets.*
+
+# Local development files
+.local/
+local/
+
+# OS generated files
+.directory
+.folder

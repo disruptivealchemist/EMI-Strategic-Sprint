@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "crawl4ai-digital-footprint"
+version = "0.1.0"
+description = "A project to develop a clear digital footprint map for clients using Crawl4AI."
+authors = ["Your Name <youremail@example.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+requests = "^2.25.1"
+beautifulsoup4 = "^4.9.3"
+pandas = "^1.1.5"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

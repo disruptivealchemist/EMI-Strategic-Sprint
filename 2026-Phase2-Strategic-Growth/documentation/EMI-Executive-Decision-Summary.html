@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMI-Emery Phase 2 Strategic Growth - Executive Decision Summary</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            min-height: 100vh;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+        
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .quick-decision-bar {
+            background: #27ae60;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            background: #ecf0f1;
+            border-bottom: 3px solid #3498db;
+        }
+        
+        .nav-tab {
+            flex: 1;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            border: none;
+            background: none;
+            color: #2c3e50;
+        }
+        
+        .nav-tab:hover {
+            background: #d5dbdb;
+        }
+        
+        .nav-tab.active {
+            background: #3498db;
+            color: white;
+        }
+        
+        .content-section {
+            display: none;
+            padding: 2rem;
+        }
+        
+        .content-section.active {
+            display: block;
+        }
+        
+        .value-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .value-card {
+            background: #f8f9fa;
+            border-left: 5px solid #3498db;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .value-card h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .value-card .icon {
+            font-size: 1.5rem;
+            margin-right: 0.5rem;
+        }
+        
+        .timeline-container {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .timeline-track {
+            position: relative;
+            padding-left: 2rem;
+        }
+        
+        .timeline-track::before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, #3498db, #27ae60);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -1.85rem;
+            top: 1.5rem;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #3498db;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px #3498db;
+        }
+        
+        .timeline-week {
+            font-weight: bold;
+            color: #3498db;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+        
+        .timeline-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 0.5rem 0;
+        }
+        
+        .timeline-deliverables {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+        
+        .roi-highlight {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            margin: 2rem 0;
+        }
+        
+        .roi-number {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .decision-matrix {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .decision-card {
+            background: white;
+            border: 2px solid #ecf0f1;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .decision-card:hover {
+            border-color: #3498db;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(52, 152, 219, 0.2);
+        }
+        
+        .decision-card.recommended {
+            border-color: #27ae60;
+            background: #f7fff7;
+        }
+        
+        .decision-card.recommended::before {
+            content: "RECOMMENDED";
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #27ae60;
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .decision-card {
+            position: relative;
+        }
+        
+        .cta-section {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-top: 2rem;
+        }
+        
+        .cta-button {
+            background: #27ae60;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0 1rem;
+        }
+        
+        .cta-button:hover {
+            background: #2ecc71;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(39, 174, 96, 0.4);
+        }
+        
+        .cta-button.secondary {
+            background: transparent;
+            border: 2px solid white;
+        }
+        
+        .cta-button.secondary:hover {
+            background: white;
+            color: #2c3e50;
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .metric-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .metric-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #3498db;
+        }
+        
+        .metric-label {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2rem; }
+            .nav-tabs { flex-direction: column; }
+            .decision-matrix { grid-template-columns: 1fr; }
+            .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <h1 class="hero-title">Strategic Growth Phase 2</h1>
+            <p class="hero-subtitle">Building on Phase 1 success to capture the 6-12 month market opportunity window</p>
+        </div>
+        
+        <!-- Quick Decision Bar -->
+        <div class="quick-decision-bar">
+            ⚡ DECISION REQUIRED: January 12, 2026 project start • Investment: $60K-$80K • Expected ROI: 400-600%
+        </div>
+        
+        <!-- Navigation -->
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('overview')">📊 Overview</button>
+            <button class="nav-tab" onclick="showSection('timeline')">📅 Timeline</button>
+            <button class="nav-tab" onclick="showSection('value')">💰 Value</button>
+            <button class="nav-tab" onclick="showSection('decision')">✅ Decision</button>
+        </div>
+        
+        <!-- Overview Section -->
+        <div class="content-section active" id="overview">
+            <h2>What We're Building Together</h2>
+            
+            <div class="value-grid">
+                <div class="value-card">
+                    <h3><span class="icon">🚀</span> Project One: Immediate Wins</h3>
+                    <p><strong>6 weeks</strong> • Get conference-ready and distribution-enabled</p>
+                    <ul style="margin-top: 1rem; padding-left: 1rem;">
+                        <li>Updated sales materials for immediate use</li>
+                        <li>Distributor enablement packages</li>
+                        <li>Conference presentation materials</li>
+                    </ul>
+                </div>
+                
+                <div class="value-card">
+                    <h3><span class="icon">🏗️</span> Project Two: Foundation Building</h3>
+                    <p><strong>18 weeks</strong> • Long-term systems and market expansion</p>
+                    <ul style="margin-top: 1rem; padding-left: 1rem;">
+                        <li>AI-powered tools and automation</li>
+                        <li>Industry authority and thought leadership</li>
+                        <li>Complete export market framework</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="roi-highlight">
+                <div class="roi-number">400-600%</div>
+                <p>Expected ROI within 12-18 months based on conference opportunities and market expansion</p>
+            </div>
+            
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-number">18</div>
+                    <div class="metric-label">Weeks Duration</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-number">145+</div>
+                    <div class="metric-label">Detailed Tasks</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-number">2</div>
+                    <div class="metric-label">Concurrent Projects</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-number">4</div>
+                    <div class="metric-label">Major Milestones</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Timeline Section -->
+        <div class="content-section" id="timeline">
+            <h2>Project Timeline & Milestones</h2>
+            
+            <div class="timeline-container">
+                <div class="timeline-track">
+                    <div class="timeline-item">
+                        <div class="timeline-week">Weeks 1-6: Project One</div>
+                        <div class="timeline-title">Immediate Client Updates</div>
+                        <div class="timeline-deliverables">Updated materials, distributor packages, conference readiness</div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-week">Weeks 2-8: Foundation</div>
+                        <div class="timeline-title">Strategic Systems Development</div>
+                        <div class="timeline-deliverables">AI framework, documentation systems, brand integration</div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-week">Weeks 9-14: Authority</div>
+                        <div class="timeline-title">Industry Leadership & Research</div>
+                        <div class="timeline-deliverables">Thought leadership, customer insights, market intelligence</div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-week">Weeks 15-18: Integration</div>
+                        <div class="timeline-title">Complete System Integration</div>
+                        <div class="timeline-deliverables">Brand toolkit, export framework, training & handover</div>
+                    </div>
+                </div>
+            </div>
+            
+            <h3>Key Decision Gates</h3>
+            <div class="value-grid">
+                <div class="value-card">
+                    <h4>🚦 Gate 1: Week 3</h4>
+                    <p>Brand strategy approved, project operational</p>
+                </div>
+                <div class="value-card">
+                    <h4>🚦 Gate 2: Week 6</h4>
+                    <p>Project One complete, immediate materials ready</p>
+                </div>
+                <div class="value-card">
+                    <h4>🚦 Gate 3: Week 12</h4>
+                    <p>AI tools operational, authority positioning established</p>
+                </div>
+                <div class="value-card">
+                    <h4>🚦 Gate 4: Week 18</h4>
+                    <p>All systems integrated, team autonomous</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Value Section -->
+        <div class="content-section" id="value">
+            <h2>Strategic Value & ROI</h2>
+            
+            <div class="value-grid">
+                <div class="value-card">
+                    <h3><span class="icon">📈</span> Immediate Revenue Impact</h3>
+                    <ul>
+                        <li><strong>STC Hong Kong:</strong> $50K+ robotic lifting rack opportunity</li>
+                        <li><strong>Dr. Kewach Thailand:</strong> Confirmed sale + 45K follower reach</li>
+                        <li><strong>Setinge ASEAN:</strong> 60+ country distribution potential</li>
+                        <li><strong>Steris Partnership:</strong> OEM/packaging discussions active</li>
+                    </ul>
+                </div>
+                
+                <div class="value-card">
+                    <h3><span class="icon">🔧</span> Operational Efficiency</h3>
+                    <ul>
+                        <li><strong>AI-powered tools:</strong> 50% reduction in manual tasks</li>
+                        <li><strong>Automated systems:</strong> Consistent brand execution</li>
+                        <li><strong>Streamlined processes:</strong> Faster time-to-market</li>
+                        <li><strong>Export readiness:</strong> International expansion capability</li>
+                    </ul>
+                </div>
+                
+                <div class="value-card">
+                    <h3><span class="icon">🎯</span> Market Positioning</h3>
+                    <ul>
+                        <li><strong>Industry authority:</strong> Thought leadership establishment</li>
+                        <li><strong>Competitive advantage:</strong> 6-12 month head start</li>
+                        <li><strong>Brand consistency:</strong> Professional market presence</li>
+                        <li><strong>Customer insights:</strong> Data-driven decision making</li>
+                    </ul>
+                </div>
+                
+                <div class="value-card">
+                    <h3><span class="icon">🌍</span> Growth Foundation</h3>
+                    <ul>
+                        <li><strong>Scalable systems:</strong> Support for rapid growth</li>
+                        <li><strong>International readiness:</strong> Export market entry</li>
+                        <li><strong>Partnership frameworks:</strong> Strategic alliance capability</li>
+                        <li><strong>Team empowerment:</strong> Skills and systems training</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h3>Investment vs. Return Analysis</h3>
+            <div class="roi-highlight">
+                <h4>Conservative ROI Calculation</h4>
+                <p><strong>Investment:</strong> $60K-$80K over 18 weeks</p>
+                <p><strong>Expected Return Year 1:</strong> $240K-$480K</p>
+                <p><strong>Break-even:</strong> 3-6 months</p>
+            </div>
+        </div>
+        
+        <!-- Decision Section -->
+        <div class="content-section" id="decision">
+            <h2>Your Decision Options</h2>
+            
+            <div class="decision-matrix">
+                <div class="decision-card recommended">
+                    <h3>✅ Full Strategic Package</h3>
+                    <div style="font-size: 2rem; margin: 1rem 0; color: #27ae60;">$60K-$80K</div>
+                    <p><strong>18 weeks • Both Projects</strong></p>
+                    <ul style="text-align: left; margin: 1rem 0;">
+                        <li>Immediate client materials (6 weeks)</li>
+                        <li>Complete AI tool development</li>
+                        <li>Industry authority positioning</li>
+                        <li>Export market framework</li>
+                        <li>Full system integration</li>
+                    </ul>
+                    <p style="color: #27ae60;"><strong>Maximum ROI • Complete transformation</strong></p>
+                </div>
+                
+                <div class="decision-card">
+                    <h3>⚡ Quick Wins Only</h3>
+                    <div style="font-size: 2rem; margin: 1rem 0; color: #3498db;">$15K-$20K</div>
+                    <p><strong>6 weeks • Project One</strong></p>
+                    <ul style="text-align: left; margin: 1rem 0;">
+                        <li>Updated sales materials</li>
+                        <li>Distributor packages</li>
+                        <li>Conference materials</li>
+                        <li>Basic brand updates</li>
+                        <li>PowerPoint integration</li>
+                    </ul>
+                    <p style="color: #e74c3c;"><strong>Limited scope • No long-term systems</strong></p>
+                </div>
+            </div>
+            
+            <h3>Why Full Package is Recommended</h3>
+            <div class="value-card" style="background: #f7fff7; border-color: #27ae60;">
+                <h4>🎯 Strategic Timing Advantage</h4>
+                <p>The 6-12 month market opportunity window requires comprehensive execution. Partial implementation risks losing competitive advantage and conference momentum.</p>
+                
+                <h4 style="margin-top: 1rem;">💰 ROI Multiplication</h4>
+                <p>Full package creates compounding value: immediate wins fund long-term systems, AI tools accelerate growth, export framework opens new markets.</p>
+                
+                <h4 style="margin-top: 1rem;">🔄 Operational Transformation</h4>
+                <p>Complete systems integration ensures EMI operates at scale, with reduced manual work and increased strategic capability.</p>
+            </div>
+        </div>
+        
+        <!-- CTA Section -->
+        <div class="cta-section">
+            <h2>Ready to Move Forward?</h2>
+            <p style="margin: 1rem 0; font-size: 1.1rem;">Start January 12, 2026 • Immediate results within 6 weeks • Complete transformation in 18 weeks</p>
+            
+            <button class="cta-button" onclick="window.open('mailto:lisa@successsherpa.com?subject=EMI Phase 2 - YES, Full Package&body=Hi Lisa, We are ready to move forward with the Full Strategic Package for EMI Phase 2. Please send us the contract and schedule our kickoff meeting for January 12, 2026.')">
+                YES - Full Package ($60K-$80K)
+            </button>
+            
+            <button class="cta-button secondary" onclick="window.open('mailto:lisa@successsherpa.com?subject=EMI Phase 2 - Questions&body=Hi Lisa, We have questions about the EMI Phase 2 proposal. Can we schedule a call to discuss?')">
+                I Have Questions
+            </button>
+            
+            <div style="margin-top: 2rem; font-size: 0.9rem; opacity: 0.8;">
+                <p>📞 Questions? Call Lisa directly: [Phone Number]</p>
+                <p>📧 Email: lisa@successsherpa.com</p>
+                <p>⏰ Next available start: January 12, 2026</p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => section.classList.remove('active'));
+            
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.nav-tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+        
+        // Smooth scrolling for better UX
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Add loading animation
+        window.addEventListener('load', function() {
+            document.body.style.opacity = '0';
+            setTimeout(() => {
+                document.body.style.transition = 'opacity 0.5s ease-in-out';
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+collected_at,seed,url,domain,title,description,snippet
+2025-10-09T06:46:03.874209,emeryindustries.com,https://emeryindustries.com,emeryindustries.com,,,
+2025-10-09T06:46:03.874209,Emery Industries,,,BRAND_SEED,Brand / keyword seed — run external search (Google/Bing/APIs) and add results,
+# Not a full script, just a concept
+import requests
+api_key = "YOUR_BING_API_KEY"
+query = "Emery Industries"
+url = f"https://api.bing.microsoft.com/v7.0/search?q={query}"
+headers = {"Ocp-Apim-Subscription-Key": api_key}
+resp = requests.get(url, headers=headers)
+# Parse and add results to your CSV

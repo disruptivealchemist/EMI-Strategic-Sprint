@@ -1,0 +1,32 @@
+# filepath: brand-entity-consolidation/config/settings.yaml
+project_name: Brand Entity Consolidation
+version: 1.0.0
+description: A project to identify and standardize variations of a brand name across the web.
+
+data_sources:
+  web_crawler:
+    enabled: true
+    crawl_depth: 3
+    user_agent: "BrandConsolidationBot/1.0"
+
+  social_media:
+    enabled: true
+    platforms:
+      - twitter
+      - facebook
+      - instagram
+
+  competitor_analysis:
+    enabled: true
+    competitors:
+      - "Competitor A"
+      - "Competitor B"
+
+output:
+  format: json
+  directory: "./output"
+  filename: consolidated_brands.json
+
+logging:
+  level: INFO
+  file: "./logs/consolidation.log"

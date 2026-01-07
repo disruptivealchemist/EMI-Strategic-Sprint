@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-### Duration: 18 weeks (January 12 - May 30, 2026)
+### Duration: 18 weeks (January 12 - May 2, 2026)
 ### Investment: $60K-$80K
 ### Expected ROI: 400-600% within 12-18 months
 

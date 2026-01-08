@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Phase 2 Strategic Growth - EMI-Emery Proposal Portal (Updated Jan 8, 2026)</title>
+    <title>Phase 2 Strategic Growth - EMI-Emery Proposal Portal</title>
     <style>
         * {
             margin: 0;
@@ -665,11 +665,25 @@
         }
 
         function approveProject() {
-            window.open('mailto:lisa@successsherpa.com?subject=EMI Phase 2 - APPROVED Full Package&body=Hi Lisa,%0A%0AWe are ready to move forward with the Full Strategic Package for EMI Phase 2:%0A%0AProject 1: $20K-$25K (6 weeks foundational setup)%0AProject 2: $10K/month (ongoing strategic development)%0A%0APlease send us the contract and schedule our kickoff meeting for January 12, 2026.%0A%0ABest regards,%0AJames, Helena & Isabelle Emery');
+            var subject = 'EMI Phase 2 - APPROVED Full Package';
+            var body = 'Hi Lisa,%0A%0A' +
+                      'We are ready to move forward with the Full Strategic Package for EMI Phase 2:%0A%0A' +
+                      'Project 1: $20K-$25K (6 weeks foundational setup)%0A' +
+                      'Project 2: $10K/month (ongoing strategic development)%0A%0A' +
+                      'Please send us the contract and schedule our kickoff meeting for January 12, 2026.%0A%0A' +
+                      'Best regards,%0A' +
+                      'James, Helena & Isabelle Emery';
+            window.open('mailto:lisa@successsherpa.com?subject=' + subject + '&body=' + body);
         }
 
         function askQuestions() {
-            window.open('mailto:lisa@successsherpa.com?subject=EMI Phase 2 - Questions&body=Hi Lisa,%0A%0AWe have questions about the EMI Phase 2 proposal. Can we schedule a call to discuss?%0A%0ABest regards,%0AThe Emery Team');
+            var subject = 'EMI Phase 2 - Questions';
+            var body = 'Hi Lisa,%0A%0A' +
+                      'We have questions about the EMI Phase 2 proposal. ' +
+                      'Can we schedule a call to discuss?%0A%0A' +
+                      'Best regards,%0A' +
+                      'The Emery Team';
+            window.open('mailto:lisa@successsherpa.com?subject=' + subject + '&body=' + body);
         }
 
         // Smooth scrolling and animations

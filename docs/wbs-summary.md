@@ -165,18 +165,20 @@
 - Project Management & Training: 10%
 
 ### Project Two Allocation ($10K per month):
-**Month 1-3 (Guaranteed):** $30K total
+**Month 1-3 (Initial Foundation):** $30K total ($10K/month)
 - WP6 Customer Experience: 20%
 - WP7 AI Tools & Development: 30%
 - WP8 Industry Authority: 25%
 - WP9 Advanced Research: 15%
 - Project Management: 10%
 
-**Month 4+ (Flexible):** $10K or $5K per month
-- WP10 Brand Toolkit: Variable scope
-- WP11 Export Framework: Variable scope
-- Ongoing Support & Optimization: Continuous
-- Monthly scope review and adjustment
+**After 3-Month Strategic Review:** $10K or $5K per month
+- **$10K/month option:** Full strategic development and system integration
+- **$5K/month option:** Maintenance, lighter scope, and priority deliverables
+- WP10 Brand Toolkit: Variable scope based on investment level
+- WP11 Export Framework: Variable scope based on investment level
+- Ongoing Support & Optimization: Continuous at appropriate level
+- **Strategic Review Process:** Quarterly assessment of deliverables, strategic alignment, and EMI capacity
 
 ## Success Metrics by Phase
 

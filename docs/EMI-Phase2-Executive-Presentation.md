@@ -197,9 +197,9 @@ Building on Phase 1's exceptional success (21 deliverables completed), EMI has a
 4. **Strategic Investment:** Foundation + strategic systems = maximum ROI potential
 
 ### **Next Step: Project Approval**
-📧 **Email Approval:** [lisa@successsherpa.com](mailto:lisa@successsherpa.com?subject=EMI%20Phase%202%20-%20APPROVED%20Full%20Package&body=Hi%20Lisa,%0A%0AWe%20are%20ready%20to%20move%20forward%20with%20the%20Full%20Strategic%20Package%20for%20EMI%20Phase%202:%0A%0AProject%201:%20$20K-$35K%20(6%20weeks%20foundational%20setup)%0AProject%202:%20$30K%20for%203-month%20foundation%20period%20($10K/month)%0AStrategic%20review%20after%203%20months%20for%20ongoing%20investment%20level%0A%0APlease%20send%20us%20the%20contract%20and%20schedule%20our%20kickoff%20meeting%20for%20January%2012,%202026.%0A%0ABest%20regards,%0AJames,%20Helena%20&%20Isabelle%20Emery)
+📧 **Email Approval:** [thechief@aimegos.com](mailto:thechief@aimegos.com?subject=EMI%20Phase%202%20-%20APPROVED%20Full%20Package&body=Hi%20Lisa,%0A%0AWe%20are%20ready%20to%20move%20forward%20with%20the%20Full%20Strategic%20Package%20for%20EMI%20Phase%202:%0A%0AProject%201:%20$20K-$35K%20(6%20weeks%20foundational%20setup)%0AProject%202:%20$30K%20for%203-month%20foundation%20period%20($10K/month)%0AStrategic%20review%20after%203%20months%20for%20ongoing%20investment%20level%0A%0APlease%20send%20us%20the%20contract%20and%20schedule%20our%20kickoff%20meeting%20for%20January%2012,%202026.%0A%0ABest%20regards,%0AJames,%20Helena%20&%20Isabelle%20Emery)
 
-📞 **Questions:** Call Lisa directly for immediate discussion  
+📞 **Questions:** Call Lisa directly: 0411 124 240  
 📋 **Contract:** Ready for signature and January 12 project launch
 
 ---

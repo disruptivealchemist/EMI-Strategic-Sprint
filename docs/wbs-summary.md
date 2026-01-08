@@ -157,11 +157,12 @@
 
 ## Budget Allocation by Work Package
 
-### Project One Allocation ($20K-$25K):
+### Project One Allocation ($20K-$35K):
 - WP1 Project Initiation: 15%
-- WP2 Brand Strategy: 30%
-- WP3 Distributor Documentation: 25%
-- WP4 PowerPoint Integration: 20%
+- WP2 Brand Strategy: 25%
+- WP3 Distributor Documentation: 20%
+- WP4 PowerPoint Integration: 15%
+- WP5 Web Development: 15% (variable based on requirements)
 - Project Management & Training: 10%
 
 ### Project Two Allocation ($10K per month):

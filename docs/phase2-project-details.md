@@ -3,7 +3,7 @@
 ## Project Overview
 
 ### Duration: 18 weeks (January 12 - May 2, 2026)
-### Investment: Project 1: $20K-$25K | Project 2: $30K (3 months) + ongoing
+### Investment: Project 1: $20K-$35K | Project 2: $30K (3 months) + ongoing
 ### Expected ROI: 400-600% within 12-18 months
 
 ## Dual Project Approach
@@ -124,12 +124,13 @@
 
 ## Investment Breakdown
 
-### Project One: $20K-$25K
+### Project One: $20K-$35K
 - Strategic analysis and planning
 - Brand updates and optimization
 - Distributor documentation
 - PowerPoint integration system
 - Training and handover
+- **Web development requirements** (pricing varies based on complexity)
 
 ### Project Two: $30K for initial 3-month foundation period
 - Custom AI tool development

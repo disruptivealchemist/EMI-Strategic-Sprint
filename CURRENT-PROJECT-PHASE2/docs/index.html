@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Phase 2 Strategic Growth - EMI-Emery Proposal Portal</title>
+    <title>EMI Phase 2 Strategic Growth - Client Portal Hub</title>
     <style>
         * {
             margin: 0;
@@ -13,41 +13,468 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background-color: #f8fafc;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: #1e293b;
             line-height: 1.6;
+            min-height: 100vh;
         }
 
-        .container {
+        .portal-hub-container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 40px 20px;
         }
 
-        .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 40px 0;
+        .hub-header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 50px 40px;
+            margin-bottom: 40px;
             text-align: center;
-            margin-bottom: 30px;
-            border-radius: 12px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
-        .header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
+        .hub-header h1 {
+            color: #1e40af;
+            font-size: 3em;
+            margin-bottom: 20px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #1e40af, #3730a3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .project-status-banner {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .status-badge {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 0.9em;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .portal-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .portal-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .portal-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s;
+        }
+
+        .portal-card:hover::before {
+            left: 100%;
+        }
+
+        .portal-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 80px rgba(0,0,0,0.15);
+        }
+
+        .portal-icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .portal-card h2 {
+            color: #1e40af;
+            font-size: 1.8em;
+            margin-bottom: 15px;
             font-weight: 700;
         }
 
-        .header p {
-            font-size: 1.2em;
-            opacity: 0.9;
+        .portal-card p {
+            color: #64748b;
+            margin-bottom: 25px;
+            font-size: 1.1em;
         }
 
-        .decision-bar {
-            background: linear-gradient(135deg, #10b981, #059669);
+        .portal-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #3b82f6, #1e40af);
             color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+        }
+
+        .portal-btn:hover {
+            background: linear-gradient(135deg, #1e40af, #1e3a8a);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+        }
+
+        .portal-btn.secondary {
+            background: linear-gradient(135deg, #10b981, #059669);
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .portal-btn.secondary:hover {
+            background: linear-gradient(135deg, #059669, #047857);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+        }
+
+        .project-overview {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .metric-card {
+            background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+            border: 2px solid #0ea5e9;
+            border-radius: 16px;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #0369a1;
+            margin-bottom: 10px;
+        }
+
+        .metric-label {
+            color: #0f766e;
+            font-weight: 600;
+        }
+
+        .quick-actions {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .footer-info {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.9);
+            margin-top: 40px;
+            padding: 20px;
+        }
+
+        .footer-info p {
+            margin: 5px 0;
+        }
+
+        .urgent-banner {
+            background: linear-gradient(135deg, #dc2626, #b91c1c);
+            color: white;
+            padding: 20px;
+            border-radius: 16px;
+            margin: 30px 0;
+            text-align: center;
+            font-weight: bold;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { box-shadow: 0 0 20px rgba(220, 38, 38, 0.5); }
+            to { box-shadow: 0 0 30px rgba(220, 38, 38, 0.8); }
+        }
+
+        @media (max-width: 768px) {
+            .hub-header h1 {
+                font-size: 2em;
+            }
+            
+            .portal-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .portal-card {
+                padding: 30px 20px;
+            }
+            
+            .overview-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="portal-hub-container">
+        
+        <!-- Header -->
+        <div class="hub-header">
+            <h1>🚀 EMI Strategic Growth Portal Hub</h1>
+            <p style="font-size: 1.3em; color: #475569; margin: 20px 0;">
+                <strong>Your Complete Project Dashboard & Resource Center</strong>
+            </p>
+            <p style="color: #64748b;">
+                Current Date: February 2, 2026 | Project Week 3 of 18 | Phase: Active Development
+            </p>
+            
+            <div class="project-status-banner">
+                <span class="status-badge">✅ APPROVED & FUNDED</span>
+                <span class="status-badge">🔄 PROJECT 1 ACTIVE</span>
+                <span class="status-badge">⏳ PROJECT 2 READY</span>
+            </div>
+        </div>
+
+        <!-- Urgent Banner -->
+        <div class="urgent-banner">
+            🚨 WEEK 4 COORDINATION REQUIRED: CSD Catalogue feedback needed from Gerald, Isabelle & Helena by Feb 7
+        </div>
+
+        <!-- Project Overview -->
+        <div class="project-overview">
+            <h2 style="color: #1e40af; font-size: 2em; margin-bottom: 20px; text-align: center;">📊 Project Overview & Current Status</h2>
+            <p style="font-size: 1.2em; text-align: center; color: #475569; margin-bottom: 30px;">
+                Complete rebranding program with strategic systems development for long-term competitive advantage
+            </p>
+            
+            <div class="overview-grid">
+                <div class="metric-card">
+                    <div class="metric-value">$50K</div>
+                    <div class="metric-label">Total Investment</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">17%</div>
+                    <div class="metric-label">Overall Progress</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">17</div>
+                    <div class="metric-label">Materials to Rebrand</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">400%</div>
+                    <div class="metric-label">Expected ROI</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Portal Navigation Grid -->
+        <div class="portal-grid">
+            
+            <!-- Live Project Portal -->
+            <div class="portal-card">
+                <span class="portal-icon">📊</span>
+                <h2>Live Project Dashboard</h2>
+                <p>Real-time project tracking with team coordination, risk management, and deliverables progress</p>
+                <a href="EMI-Project-Portal-Feb2026.html" class="portal-btn">🚀 Open Live Dashboard</a>
+                <div style="margin-top: 15px; font-size: 0.9em; color: #059669;">
+                    <strong>✅ Updated Today</strong> • Interactive Timeline • Team Status
+                </div>
+            </div>
+
+            <!-- Executive Presentation -->
+            <div class="portal-card">
+                <span class="portal-icon">👔</span>
+                <h2>Executive Presentation</h2>
+                <p>Comprehensive stakeholder presentation with investment details and strategic overview</p>
+                <a href="EMI-Phase2-Executive-Presentation.html" class="portal-btn secondary">📋 View Presentation</a>
+                <div style="margin-top: 15px; font-size: 0.9em; color: #0369a1;">
+                    <strong>Decision Support</strong> • ROI Analysis • Timeline Overview
+                </div>
+            </div>
+
+            <!-- Project Documentation -->
+            <div class="portal-card">
+                <span class="portal-icon">📚</span>
+                <h2>Complete Documentation</h2>
+                <p>Detailed project specifications, work breakdown structure, and implementation plans</p>
+                <a href="phase2-project-details.md" class="portal-btn">📖 Read Documentation</a>
+                <div style="margin-top: 15px; font-size: 0.9em; color: #7c3aed;">
+                    <strong>Technical Details</strong> • Full Scope • Implementation Guide
+                </div>
+            </div>
+
+            <!-- Helena's Materials Tracker -->
+            <div class="portal-card">
+                <span class="portal-icon">🎨</span>
+                <h2>Helena's Materials Progress</h2>
+                <p>Complete tracking of all 17 rebranding materials with status updates and review schedules</p>
+                <a href="#materials-tracker" class="portal-btn secondary">📋 Track Materials</a>
+                <div style="margin-top: 15px; font-size: 0.9em; color: #dc2626;">
+                    <strong>Week 4 Focus</strong> • 6 High-Priority Items • Review Coordination
+                </div>
+            </div>
+
+            <!-- Communication Center -->
+            <div class="portal-card">
+                <span class="portal-icon">📢</span>
+                <h2>Team Communication</h2>
+                <p>Latest updates, decisions, action items, and direct contact with project stakeholders</p>
+                <a href="mailto:thechief@aimegos.com?subject=EMI%20Project%20Portal%20Communication" class="portal-btn">📧 Contact Team</a>
+                <div style="margin-top: 15px; font-size: 0.9em; color: #059669;">
+                    <strong>Weekly Meetings</strong> • Fridays 3 PM AEST • Status Updates
+                </div>
+            </div>
+
+            <!-- GitHub Repository -->
+            <div class="portal-card">
+                <span class="portal-icon">💾</span>
+                <h2>Technical Repository</h2>
+                <p>Complete project files, version control, and technical implementation tracking</p>
+                <a href="https://github.com/disruptivealchemist/EMI-Strategic-Sprint" target="_blank" class="portal-btn secondary">🔗 View Repository</a>
+                <div style="margin-top: 15px; font-size: 0.9em; color: #4338ca;">
+                    <strong>Version Control</strong> • Full History • Technical Assets
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions Section -->
+        <div class="quick-actions">
+            <h2 style="color: #1e40af; font-size: 2em; margin-bottom: 20px;">⚡ Quick Actions</h2>
+            <p style="color: #64748b; font-size: 1.1em;">Direct access to key project functions and stakeholder communication</p>
+            
+            <div class="action-buttons">
+                <a href="EMI-Project-Portal-Feb2026.html#timeline" class="portal-btn">📅 View Project Timeline</a>
+                <a href="EMI-Project-Portal-Feb2026.html#team" class="portal-btn">👥 Team Dashboard</a>
+                <a href="EMI-Project-Portal-Feb2026.html#deliverables" class="portal-btn secondary">📦 Track Deliverables</a>
+                <a href="EMI-Project-Portal-Feb2026.html#risks" class="portal-btn secondary">⚠️ Risk Management</a>
+                <a href="mailto:helena@emery.com?subject=CSD%20Catalogue%20Approval%20Required" class="portal-btn">📧 Helena (Brand Approval)</a>
+                <a href="mailto:simone@emery.com?subject=Week%204%20Coordination" class="portal-btn">📧 Simone (Coordination)</a>
+            </div>
+        </div>
+
+        <!-- Footer Information -->
+        <div class="footer-info">
+            <p><strong>EMI Phase 2 Strategic Growth Project Portal</strong></p>
+            <p>Project Manager: Lisa Goller | Email: thechief@aimegos.com | Phone: 0411 124 240</p>
+            <p>Portal Last Updated: February 2, 2026 | Next Update: February 5, 2026</p>
+            <p style="margin-top: 20px; opacity: 0.8;">
+                🔒 Secure Client Portal • Real-time Updates • Mobile Optimized • Professional Grade
+            </p>
+        </div>
+
+    </div>
+
+    <script>
+        // Add smooth scrolling and interactive effects
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate cards on scroll
+            const cards = document.querySelectorAll('.portal-card');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            cards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(card);
+            });
+
+            // Add current time display
+            function updateTime() {
+                const now = new Date();
+                const timeString = now.toLocaleString('en-AU', {
+                    timeZone: 'Australia/Sydney',
+                    weekday: 'long',
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+                
+                // Update any time displays
+                const timeElements = document.querySelectorAll('.current-time');
+                timeElements.forEach(el => el.textContent = timeString);
+            }
+
+            updateTime();
+            setInterval(updateTime, 60000); // Update every minute
+
+            // Add notification for urgent items
+            const urgentBanner = document.querySelector('.urgent-banner');
+            if (urgentBanner) {
+                urgentBanner.addEventListener('click', function() {
+                    window.location.href = 'EMI-Project-Portal-Feb2026.html#communication';
+                });
+            }
+
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
             padding: 20px;
             text-align: center;
             margin-bottom: 30px;

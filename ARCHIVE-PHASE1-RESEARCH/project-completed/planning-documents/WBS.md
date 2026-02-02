@@ -11,20 +11,20 @@ This document provides a detailed Work Breakdown Structure (WBS) for the 6-week 
 *   **1.1 Project Planning**
     *   *Duration:* 3 Days
     *   *Dependencies:* None
-    *   **1.1.1 Conduct stakeholder kick-off meeting** (Duration: 2 Hours)
-    *   **1.1.2 Define and document final project scope** (Duration: 1 Day, Dependencies: 1.1.1)
-    *   **1.1.3 Create detailed project schedule** (Duration: 1 Day, Dependencies: 1.1.2)
-    *   **1.1.4 Finalize and approve "Sprint Plan" document** (Duration: 4 Hours, Dependencies: 1.1.3)
+    *   **1.1.1 Conduct stakeholder kick-off meeting** (Duration: 2 Hours, Owner: Lisa (PM))
+    *   **1.1.2 Define and document final project scope** (Duration: 1 Day, Dependencies: 1.1.1, Owner: Lisa (PM))
+    *   **1.1.3 Create detailed project schedule** (Duration: 1 Day, Dependencies: 1.1.2, Owner: Lisa (PM))
+    *   **1.1.4 Finalize and approve "Sprint Plan" document** (Duration: 4 Hours, Dependencies: 1.1.3, Owner: Lisa (PM), Approver: James (Client))
 *   **1.2 Project Tracking & Communication**
     *   *Duration:* Ongoing for 6 Weeks
     *   *Dependencies:* 1.1.4
-    *   **1.2.1 Hold weekly stakeholder status meetings** (Duration: 1 Hour/Week)
-    *   **1.2.2 Track progress against KPIs** (Duration: 2 Hours/Week)
+    *   **1.2.1 Hold weekly stakeholder status meetings** (Duration: 1 Hour/Week, Owner: Lisa (PM))
+    *   **1.2.2 Track progress against KPIs** (Duration: 2 Hours/Week, Owner: Lisa (PM))
 *   **1.3 Project Handoff**
     *   *Duration:* 2 Days
     *   *Dependencies:* 3.2.4, 4.3.2
-    *   **1.3.1 Archive all project documentation** (Duration: 1 Day)
-    *   **1.3.2 Conduct project wrap-up and "lessons learned" session** (Duration: 4 Hours, Dependencies: 1.3.1)
+    *   **1.3.1 Archive all project documentation** (Duration: 1 Day, Owner: Lisa (PM))
+    *   **1.3.2 Conduct project wrap-up and "lessons learned" session** (Duration: 4 Hours, Dependencies: 1.3.1, Owner: Lisa (PM))
 
 ### **2.0 Brand Refinement**
 

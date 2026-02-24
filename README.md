@@ -5,24 +5,22 @@
 **Investment:** $60K-$80K over 18 weeks  
 **Expected ROI:** 400-600% within 12-18 months
 
----
-
 ## 📋 For Stakeholder Review
 
 ### 🎯 **Quick Decision Summary**
-👉 **[Executive Decision Summary (Interactive)](2026-Phase2-Strategic-Growth/documentation/EMI-Executive-Decision-Summary.html)**  
+👉 **[Executive Decision Summary (Interactive)](docs/EMI-Phase2-Executive-Presentation.html)**  
 *Click to open interactive proposal - works best in browser*
 
-👉 **[One-Page Decision Summary (PDF-friendly)](2026-Phase2-Strategic-Growth/documentation/One-Page-Executive-Decision-Summary.md)**  
+👉 **[One-Page Decision Summary (PDF-friendly)](docs/phase2-project-details.md)**  
 *Print-friendly version for offline review*
 
-👉 **[Stakeholder-Specific Value](2026-Phase2-Strategic-Growth/documentation/Stakeholder-Specific-Value-Summary.md)**  
+👉 **[Stakeholder-Specific Value](CURRENT-PROJECT-PHASE2/2026-Phase2-Strategic-Growth/documentation/Stakeholder-Specific-Value-Summary.md)**  
 *Individual benefits for James, Helena, and Isabelle*
 
 ### 📊 **Detailed Planning Documents**
-- **[Complete Work Breakdown Structure](2026-Phase2-Strategic-Growth/planning/EMI-Phase2-Work-Breakdown-Structure.md)** - 145+ detailed tasks with dependencies
-- **[Project Timeline (Gantt Chart)](2026-Phase2-Strategic-Growth/planning/EMI-Phase2-Gantt-Chart.csv)** - Import into Excel/Project for visual timeline
-- **[Sprint Tracking System](2026-Phase2-Strategic-Growth/tracking/moon-sprint-deliverables-tracker.md)** - Bi-weekly deliverable management
+- **[Complete Work Breakdown Structure](docs/wbs-summary.md)** - 145+ detailed tasks with dependencies
+- **[Project Timeline (Gantt Chart)](CURRENT-PROJECT-PHASE2/EMI-PHASE2-GANTT-CHART.csv)** - Import into Excel/Project for visual timeline
+- **[Sprint Tracking System](CURRENT-PROJECT-PHASE2/PROJECT-SCOPE-TASK-TRACKER.md)** - Bi-weekly deliverable management
 
 ---
 
@@ -50,32 +48,30 @@
 - ✅ Conference success with confirmed sales opportunities
 - ✅ Strategic partnerships initiated (STC Hong Kong, Dr. Kewach, Setinge ASEAN)
 
-**All Phase 1 materials archived in:** `2025-Strategic-Growth-Phase1-COMPLETED/`
+All Phase 1 materials archived in: **[2025-Strategic-Growth-Phase1-COMPLETED](ARCHIVE-PHASE1-RESEARCH/2025-Strategic-Growth-Phase1-COMPLETED/)**
 
 ---
 
 ## ⏰ Critical Timeline
 
 | Date | Action Required |
-|------|----------------|
+| :--- | :--- |
 | **January 10** | Final decision and contract signing |
 | **January 11** | Project kickoff and stakeholder alignment |
 | **January 12** | **PROJECT START** - Week 1 activities begin |
-| **February 23** | Gate 2 - Project One completion |
-| **May 2** | Gate 4 - Complete project handover |
-
----
+| **February 23** | **Gate 2** - Project One completion |
+| **May 2** | **Gate 4** - Complete project handover |
 
 ## 🤝 Decision Options
 
-### ✅ **RECOMMENDED: Full Strategic Package**
+### ✅ RECOMMENDED: Full Strategic Package
 - **Investment:** $60K-$80K
 - **Duration:** 18 weeks
 - **Scope:** Both projects + complete transformation
 - **Benefit:** Maximum ROI, competitive advantage, complete systems
 
-### ⚡ **Alternative: Quick Wins Only**
-- **Investment:** $15K-$20K  
+### ⚡ Alternative: Quick Wins Only
+- **Investment:** $15K-$20K
 - **Duration:** 6 weeks
 - **Scope:** Project One only
 - **Risk:** Limited impact, no long-term systems
@@ -84,12 +80,12 @@
 
 ## 📞 Next Steps
 
-### **To Approve Full Package:**
+**To Approve Full Package:**
 1. Reply to this repository with "APPROVED - Full Package"
 2. Lisa will send contract for signature
 3. Schedule kickoff meeting for January 11, 2026
 
-### **Questions or Discussion:**
+**Questions or Discussion:**
 - 📧 Email: lisa@successsherpa.com
 - 📞 Phone: [Contact Number]
 - 💬 Comment directly on this repository
@@ -100,34 +96,45 @@
 
 ```
 EMI-Emery/
-├── 2026-Phase2-Strategic-Growth/          # ACTIVE PROJECT
-│   ├── documentation/                      # Proposals and summaries
-│   ├── planning/                          # WBS and Gantt charts
-│   └── tracking/                          # Sprint and milestone tracking
-├── 2025-Strategic-Growth-Phase1-COMPLETED/ # ARCHIVED
-│   ├── deliverables/                      # All Phase 1 outputs
-│   ├── planning-documents/                # Original project plans
-│   └── research-assets/                   # Analysis and research
-└── Reference Materials/                    # Strategic docs and assets
+├── CURRENT-PROJECT-PHASE2/          # ACTIVE PROJECT
+│   ├── documentation/               # Proposals and summaries
+│   ├── planning/                    # WBS and Gantt charts
+│   └── tracking/                    # Sprint and milestone tracking
+├── ARCHIVE-PHASE1-RESEARCH/         # ARCHIVED
+│   ├── deliverables/                # All Phase 1 outputs
+│   ├── planning-documents/          # Original project plans
+│   └── research-assets/             # Analysis and research
+└── docs/                            # Strategic docs and assets (Portal)
 ```
 
+## ⚡ Market Opportunity Window
+6-12 months to capture competitive advantage
+
+## 🎯 Success Guarantee
+Milestone-based delivery with regular approval gates
+
+## 🤝 Partnership Approach
+Success Sherpa + EMI team collaboration
+
 ---
 
-**⚡ Market Opportunity Window:** 6-12 months to capture competitive advantage  
-**🎯 Success Guarantee:** Milestone-based delivery with regular approval gates  
-**🤝 Partnership Approach:** Success Sherpa + EMI team collaboration  
+### Ready to transform EMI-Emery into the strategic, systematic, scalable organization you envision?
+
+The time is now. The opportunity is clear. The choice is yours.
 
 ---
 
-*Ready to transform EMI-Emery into the strategic, systematic, scalable organization you envision?*
+## 🛠️ Dashboard Setup
 
-**The time is now. The opportunity is clear. The choice is yours.**
+To run the project dashboard manually:
+
+```bash
 pip install streamlit pandas plotly.express
 ```
 
 ### How to Run
 
-1.  Navigate to the project directory in your terminal.
+1.  Navigate to the `scripts-tools` directory in your terminal.
 2.  Run the Streamlit application:
     ```bash
     streamlit run dashboard.py
@@ -136,10 +143,10 @@ pip install streamlit pandas plotly.express
 
 ## Key Project Documents
 
-*   [Project Overview](project-overview.md)
-*   [Work Breakdown Structure (WBS)](WBS.md)
-*   [Risk Management Plan](risk-management-plan.md)
-*   [Gantt Chart Data (CSV)](gantt-chart.csv)
+*   [Project Overview](CURRENT-PROJECT-PHASE2/EMI-PHASE2-PROJECT-TIMELINE-SUMMARY.md)
+*   [Work Breakdown Structure (WBS)](docs/wbs-summary.md)
+*   [Gantt Chart Data (CSV)](CURRENT-PROJECT-PHASE2/EMI-PHASE2-GANTT-CHART.csv)
+*   **[Project Portal](docs/index.html)** - *New Phase 2 Dashboard*
 
 ## Key Stakeholders
 

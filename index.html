@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EMI Strategic Growth Project Hub</title>
+    <title>EMI Phase 2 Strategic Growth - Project Portal</title>
     <style>
         * {
             margin: 0;
@@ -13,131 +13,454 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #0f766e 0%, #115e59 100%);
             color: #1e293b;
             line-height: 1.6;
             min-height: 100vh;
+        }
+
+        .portal-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .portal-header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        .portal-header h1 {
+            color: #0f766e;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .status-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #14b8a6, #0d9488);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: bold;
+            margin: 10px 5px;
+        }
+
+        .status-badge.alert {
+            background: linear-gradient(135deg, #ef4444, #b91c1c);
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .dashboard-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .dashboard-card h2 {
+            color: #0f766e;
+            font-size: 1.5em;
+            margin-bottom: 20px;
             display: flex;
             align-items: center;
-            justify-content: center;
+            gap: 10px;
         }
 
-        .redirect-container {
-            max-width: 800px;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border-radius: 20px;
-            padding: 60px 40px;
+        .card-icon {
+            font-size: 1.5em;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #e2e8f0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #14b8a6, #0d9488);
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .team-member {
+            background: #f0fdfa;
+            border: 2px solid #ccfbf1;
+            border-radius: 12px;
+            padding: 20px;
             text-align: center;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: transform 0.2s ease;
         }
 
-        .redirect-container h1 {
-            color: #1e40af;
-            font-size: 2.5em;
-            margin-bottom: 20px;
-            font-weight: 800;
-            background: linear-gradient(135deg, #1e40af, #3730a3);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .redirect-container p {
-            font-size: 1.2em;
-            color: #475569;
-            margin-bottom: 40px;
-        }
-
-        .redirect-btn {
-            display: inline-block;
-            background: linear-gradient(135deg, #3b82f6, #1e40af);
-            color: white;
-            padding: 18px 36px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.2em;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
-            margin: 10px;
-        }
-
-        .redirect-btn:hover {
-            background: linear-gradient(135deg, #1e40af, #1e3a8a);
+        .team-member:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         }
 
-        .redirect-btn.secondary {
-            background: linear-gradient(135deg, #10b981, #059669);
-            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
-        }
-
-        .redirect-btn.secondary:hover {
-            background: linear-gradient(135deg, #059669, #047857);
-            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
-        }
-
-        .status-banner {
-            background: linear-gradient(135deg, #10b981, #059669);
-            color: white;
-            padding: 12px 24px;
-            border-radius: 50px;
+        .member-role {
+            color: #0f766e;
             font-weight: bold;
-            font-size: 0.9em;
+            font-size: 1.1em;
+            margin-bottom: 5px;
+        }
+
+        .member-name {
+            color: #115e59;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        .deliverables-list {
+            list-style: none;
+        }
+
+        .deliverables-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .deliverable-name {
+            flex-grow: 1;
+        }
+
+        .deliverable-status {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        
+         .status-critical {
+            background: #fee2e2;
+            color: #b91c1c;
+        }
+        
+        .status-new {
+             background: #e0f2fe;
+             color: #0369a1;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
             margin: 20px 0;
-            display: inline-block;
         }
 
-        .loading {
-            opacity: 0.7;
-            animation: pulse 1.5s ease-in-out infinite;
+        .metric-card {
+            background: linear-gradient(135deg, #0d9488, #0f766e);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
         }
 
-        @keyframes pulse {
-            0%, 100% { opacity: 0.7; }
-            50% { opacity: 1; }
+        .metric-value {
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 5px;
         }
 
-        .footer-note {
-            margin-top: 40px;
+        .metric-label {
             font-size: 0.9em;
-            color: #64748b;
+            opacity: 0.9;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #14b8a6, #0d9488);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+             background: linear-gradient(135deg, #0d9488, #0f766e);
+             color: white;
+        }
+
+        .btn-secondary {
+            background: #e2e8f0;
+            color: #1e293b;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        .gantt-container {
+            overflow-x: auto;
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .gantt-table {
+            width: 100%;
+            min-width: 800px;
+            border-collapse: collapse;
+        }
+
+        .gantt-table th,
+        .gantt-table td {
+            padding: 8px 12px;
+            text-align: left;
+            border: 1px solid #e2e8f0;
+        }
+
+        .gantt-table th {
+            background: #0f766e;
+            color: white;
+            font-weight: bold;
+        }
+
+         .gantt-bar {
+            height: 20px;
+            border-radius: 10px;
+            margin: 2px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .gantt-active {
+            background: linear-gradient(90deg, #f59e0b, #d97706);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
-    <script>
-        // Auto-redirect to main portal after 3 seconds
-        setTimeout(function() {
-            window.location.href = 'docs/index.html';
-        }, 3000);
-    </script>
 </head>
 <body>
-    <div class="redirect-container">
-        <h1>🚀 EMI Strategic Growth Project</h1>
-        <p>Redirecting you to the main project portal...</p>
+    <div class="portal-container">
         
-        <div class="status-banner">✅ Project Active - Week 3 of 18 - February 2026</div>
-        
-        <div class="loading">
-            <p>Loading Project Portal Hub...</p>
-        </div>
-        
-        <div style="margin-top: 40px;">
-            <a href="docs/index.html" class="redirect-btn">🚀 Enter Project Portal</a>
-            <a href="docs/EMI-Project-Portal-Feb2026.html" class="redirect-btn secondary">📊 Live Dashboard</a>
-        </div>
-        
-        <div class="footer-note">
-            <p><strong>Direct Access Links:</strong></p>
-            <p><a href="docs/index.html" style="color: #3b82f6;">Main Portal Hub</a> • 
-               <a href="docs/EMI-Project-Portal-Feb2026.html" style="color: #10b981;">Live Project Dashboard</a> • 
-               <a href="docs/EMI-Phase2-Executive-Presentation.html" style="color: #7c3aed;">Executive Presentation</a></p>
-            <p style="margin-top: 20px; font-size: 0.8em;">
-                Project Manager: Lisa Goller | Updated: February 2, 2026
+        <!-- Portal Header -->
+        <div class="portal-header">
+            <h1>🚀 EMI Phase 2 Strategic Growth Portal</h1>
+            <p style="font-size: 1.2em; margin: 10px 0; color: #475569;">
+                <strong>Current Date:</strong> 24 February 2026 | 
+                <strong>Project Week:</strong> 4 of 18 | 
+                <strong>Phase:</strong> Project 1 Core Execution
             </p>
+            <div>
+                <span class="status-badge">✅ PHASE 2 FUNDED</span>
+                <span class="status-badge alert">🚨 CRITICAL PERIOD (Wk 3-4)</span>
+                <span class="status-badge">⚙️ PROJECT 1 ACTIVE</span>
+            </div>
         </div>
+
+        <!-- Executive Summary -->
+        <div class="dashboard-card" style="margin-bottom: 30px;">
+            <h2><span class="card-icon">📊</span>Executive Summary</h2>
+            
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-value">Week 4</div>
+                    <div class="metric-label">Timeline Status</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">$7.8K</div>
+                    <div class="metric-label">Budget Available</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">9</div>
+                    <div class="metric-label">Urgent Tasks</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">P1</div>
+                    <div class="metric-label">Critical Priority</div>
+                </div>
+            </div>
+
+            <div style="background: #f0fdf4; border: 2px solid #14b8a6; border-radius: 12px; padding: 20px; margin: 20px 0;">
+                <h3 style="color: #0f766e; margin-bottom: 10px;">🎯 Current Focus: Immediate Impact & Cash Flow</h3>
+                 <p><strong>Goal:</strong> Clear $150k+ stock via EDM campaigns & Website Cleanup.</p>
+                <p><strong>Key Deadline:</strong> Feb 28 (End of Month) - Website Cleanup & Compliance Framework</p>
+                <p><strong>Strategic Lead:</strong> Helena Emery - Directing Brand Language</p>
+            </div>
+        </div>
+
+        <!-- Dashboard Grid -->
+        <div class="dashboard-grid">
+            
+            <!-- Timeline Visualization -->
+            <div class="dashboard-card">
+                <h2><span class="card-icon">📅</span>Timeline & Critical path</h2>
+                
+                <div class="gantt-container">
+                    <table class="gantt-table">
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Date Range</th>
+                                <th>Focus</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Week 3-4</strong></td>
+                                <td>Feb 17 - Feb 28</td>
+                                <td>🚨 Critical: Budget, Stock Clearance, Compliance</td>
+                                <td><div class="gantt-bar gantt-active" style="width: 80%;"></div></td>
+                            </tr>
+                             <tr>
+                                <td><strong>Week 4-10</strong></td>
+                                <td>Feb 24 - Mar 28</td>
+                                <td>⚙️ Project 1 Core: Distributor Enablement</td>
+                                <td><div class="gantt-bar" style="width: 10%; background: #ccc;"></div></td>
+                            </tr>
+                             <tr>
+                                <td><strong>Week 6-19</strong></td>
+                                <td>Mar 1 - May 30</td>
+                                <td>📈 Project 2: CX Optimization</td>
+                                <td><div class="gantt-bar" style="width: 0%; background: #ccc;"></div></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div style="background: #fffbeb; border: 1px solid #f59e0b; border-radius: 8px; padding: 15px; margin-top: 15px;">
+                     <h4 style="color: #d97706;">⚠️ Critical Deliverables (Due Feb 21-28):</h4>
+                    <ul style="margin-top: 10px; margin-left: 20px;">
+                        <li>EDM Campaign Suite ($2-3k) - <strong>Due Feb 21</strong></li>
+                        <li>Thailand Distributor Materials - <strong>Due Feb 24</strong></li>
+                         <li>Website Cleanup ($5-8k) - <strong>Due Feb 28</strong></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Urgent Tasks List -->
+             <div class="dashboard-card">
+                <h2><span class="card-icon">🔥</span>Urgent Tasks (Feb 24 Updates)</h2>
+                
+                <ul class="deliverables-list">
+                    <li>
+                        <span class="deliverable-name">EDM/Email Campaign Templates</span>
+                        <span class="deliverable-status status-critical">P1 - CRITICAL</span>
+                    </li>
+                    <li>
+                        <span class="deliverable-name">Branded Odoo template creation</span>
+                         <span class="deliverable-status status-critical">P1 - CRITICAL</span>
+                    </li>
+                    <li>
+                        <span class="deliverable-name">MediMesh stock clearance ($150k+)</span>
+                         <span class="deliverable-status status-critical">P1 - CRITICAL</span>
+                    </li>
+                    <li>
+                        <span class="deliverable-name">Builder direct engagement campaign</span>
+                         <span class="deliverable-status status-critical">P1 - CRITICAL</span>
+                    </li>
+                     <li>
+                        <span class="deliverable-name">Thailand Distributor Follow-up</span>
+                         <span class="deliverable-status status-new">NEW</span>
+                    </li>
+                </ul>
+
+                <div class="action-buttons" style="margin-top: 20px;">
+                    <a href="#" class="btn btn-primary">📋 View Full Task List</a>
+                </div>
+            </div>
+
+             <!-- Team Dashboard -->
+            <div class="dashboard-card">
+                <h2><span class="card-icon">👥</span>Team</h2>
+                
+                <div class="team-grid">
+                    <div class="team-member">
+                        <div class="member-role">Strategic Lead</div>
+                        <div class="member-name">Helena Emery</div>
+                        <div style="font-size: 0.9em; color: #64748b;">Partnerships & Brand</div>
+                    </div>
+                    
+                    <div class="team-member">
+                        <div class="member-role">Executive Sponsor</div>
+                        <div class="member-name">James Emery</div>
+                        <div style="font-size: 0.9em; color: #64748b;">Vision & Strategy</div>
+                    </div>
+
+                    <div class="team-member">
+                        <div class="member-role">Strategic Consultant</div>
+                        <div class="member-name">Lisa Galea</div>
+                        <div style="font-size: 0.9em; color: #64748b;">Amigos Creative</div>
+                    </div>
+                </div>
+            </div>
+            
+             <!-- Budget Snapshot -->
+             <div class="dashboard-card">
+                <h2><span class="card-icon">💰</span>Budget Snapshot</h2>
+                 <div style="background: #ecfdf5; border: 1px solid #10b981; padding: 15px; border-radius: 8px;">
+                    <p><strong>Initial Payment:</strong> $10,000</p>
+                    <p><strong>Digital Audit:</strong> -$2,200 (Completed)</p>
+                    <hr style="margin: 10px 0; border: 0; border-top: 1px solid #d1fae5;">
+                    <p style="font-size: 1.2em; color: #047857;"><strong>Available: $7,800</strong></p>
+                 </div>
+                 <p style="margin-top: 10px; font-size: 0.9em; color: #64748b;">*Next Mid-Review: March 7 (Week 6)</p>
+            </div>
+
+        </div>
+
+        <!-- Quick Actions Footer -->
+        <div style="background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-radius: 16px; padding: 30px; margin-top: 30px; text-align: center; box-shadow: 0 8px 32px rgba(0,0,0,0.1);">
+            <h3 style="color: #0f766e; margin-bottom: 20px;">🚀 Project Assets</h3>
+            
+            <div class="action-buttons" style="justify-content: center;">
+                 <!-- Ideally these would link to the actual files or the repo -->
+                <a href="#" class="btn btn-primary">📂 Browse Brand Assets</a>
+                <a href="#" class="btn btn-primary">📊 Task Tracker (CSV)</a>
+                 <a href="#" class="btn btn-secondary">📄 Timeline Summary</a>
+            </div>
+             <div style="margin-top: 20px; color: #64748b; font-size: 0.9em;">
+                <p>Updated: 24 February 2026</p>
+            </div>
+        </div>
+
     </div>
 </body>
 </html>

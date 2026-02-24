@@ -154,3 +154,28 @@ pip install streamlit pandas plotly.express
 *   **Lisa Galea:** Project Manager, Facilitator
 *   **Helena Emery:** Creative Lead, Marketing Assets
 *   **Isabelle Emery:** AI Tool Lead, Process Implementation
+
+---
+
+## 🔄 Session Updates (Feb 24, 2026)
+
+### 🚀 Phase 2 Portal Launch
+- **New Dashboard:** Launched comprehensive **App-Like Project Portal** (`docs/index.html`) featuring:
+    - Real-time **Budget Accountability** snapshot.
+    - **Visual Gantt Chart** for Critical Path tracking.
+    - **Urgent Task** highlighting for Week 3-4 priorities.
+    - **Team Availability** dashboard.
+- **Branding:** Applied "Surgical Teal" (`#0f766e`) brand theme.
+- **Logo Integration:** Added official Emery Industries logo to portal header.
+
+### 🗄️ Asset Database
+- **New Tool:** Created `create_asset_db.py` to consolidate project assets.
+- **Database:** Generated `project_assets.db` (SQLite) combining:
+    - **Existing Assets:** From Phase 1 Research (`EMERY Brand Assets...csv`).
+    - **Requested Assets:** From Phase 2 Task Export (`EMI-TASKS-EXPORT.csv`).
+- **Unified View:** Created `all_assets_unified` view for cross-referencing existing vs. requested materials.
+
+### 📚 Documentation
+- **Root Index:** Updated root `index.html` to mirror the new Project Portal (replaced old redirect).
+- **Paths:** Corrected file paths in `README.md` to align with current repo structure.
+

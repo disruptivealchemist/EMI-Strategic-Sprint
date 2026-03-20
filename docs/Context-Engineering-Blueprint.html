@@ -1,0 +1,1567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Context Engineering — Information Architecture for Human-AI Collaboration</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --navy:      #0B1929;
+      --navy-mid:  #0f2038;
+      --navy-card: #102040;
+      --navy-line: #1a3860;
+      --white:     #ffffff;
+      --off-white: #d4dde8;
+      --gray:      #7a8fa8;
+      --gray-mid:  #4a6080;
+      --red:       #cc1f1f;
+      --red-glow:  rgba(204,31,31,0.25);
+      --red-text:  #e84444;
+      --green:     #22cc66;
+      --mono:      'JetBrains Mono', 'Courier New', monospace;
+      --sans:      'Inter', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--navy);
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ─── SLIDE BASE ─── */
+    .slide {
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 64px 80px;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid var(--navy-line);
+    }
+
+    .slide-inner {
+      width: 100%;
+      max-width: 1280px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ─── BLUEPRINT GRID BACKGROUND ─── */
+    .grid-bg {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(26,56,96,0.35) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(26,56,96,0.35) 1px, transparent 1px);
+      background-size: 60px 60px;
+      z-index: 0;
+    }
+
+    /* ─── CIRCUIT LINES ─── */
+    .circuit-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      opacity: 0.15;
+    }
+
+    /* ─── TYPOGRAPHY ─── */
+    h1 {
+      font-size: clamp(48px, 6vw, 88px);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--white);
+    }
+
+    h2 {
+      font-size: clamp(32px, 4vw, 60px);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      color: var(--white);
+      text-align: center;
+      margin-bottom: 52px;
+    }
+
+    h3 {
+      font-size: clamp(20px, 2.5vw, 32px);
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    .subtitle {
+      font-size: clamp(16px, 2vw, 24px);
+      font-weight: 300;
+      color: var(--off-white);
+      margin-top: 16px;
+      line-height: 1.5;
+    }
+
+    .mono { font-family: var(--mono); }
+    .red  { color: var(--red-text); }
+    .gray { color: var(--gray); }
+
+    /* ─── LABEL CHIP ─── */
+    .label {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gray);
+    }
+
+    /* ─────────────────────────────────────────
+       SLIDE 1 — COVER
+    ───────────────────────────────────────── */
+    #s1 {
+      background: var(--navy);
+    }
+
+    #s1 h1 { max-width: 700px; }
+
+    .circuit-lines-cover {
+      position: absolute;
+      right: 0; top: 0;
+      width: 55%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    .circuit-lines-cover svg {
+      width: 100%; height: 100%;
+      opacity: 0.6;
+    }
+
+    .red-node {
+      position: absolute;
+      right: 36%;
+      top: 50%;
+      transform: translate(50%, -50%);
+      width: 80px; height: 80px;
+      z-index: 3;
+    }
+
+    .red-node::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: var(--red);
+      box-shadow: 0 0 40px 20px rgba(204,31,31,0.5), 0 0 80px 40px rgba(204,31,31,0.2);
+    }
+
+    /* ─────────────────────────────────────────
+       SLIDE 2 — STATUS QUO vs GOAL
+    ───────────────────────────────────────── */
+    #s2 { background: var(--navy-mid); }
+
+    .two-panel {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      width: 100%;
+      margin: 0 auto 48px;
+    }
+
+    .panel {
+      padding: 48px 56px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .panel-label {
+      font-family: var(--mono);
+      font-size: 13px;
+      letter-spacing: 0.15em;
+      color: var(--gray);
+      text-align: center;
+    }
+
+    .panel-divider {
+      width: 1px;
+      background: var(--navy-line);
+      align-self: stretch;
+    }
+
+    .chaos-box {
+      width: 280px; height: 280px;
+      border: 1px solid rgba(204,31,31,0.4);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(10,22,40,0.6);
+    }
+
+    .chaos-box svg {
+      width: 100%; height: 100%;
+      position: absolute;
+      inset: 0;
+      opacity: 0.8;
+    }
+
+    .chaos-label {
+      font-family: var(--mono);
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--red-text);
+      position: relative;
+      z-index: 2;
+      text-align: center;
+    }
+
+    .grid-box {
+      width: 280px; height: 280px;
+      border: 1px solid rgba(180,200,220,0.3);
+      position: relative;
+      display: grid;
+      place-items: center;
+      background: rgba(10,22,40,0.6);
+    }
+
+    .grid-inner {
+      display: grid;
+      grid-template-columns: repeat(5, 36px);
+      grid-template-rows: repeat(5, 36px);
+      gap: 12px;
+    }
+
+    .grid-node {
+      width: 36px; height: 36px;
+      border: 1.5px solid rgba(180,200,220,0.6);
+      border-radius: 50%;
+      background: transparent;
+    }
+
+    .grid-label {
+      font-family: var(--mono);
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--white);
+      position: absolute;
+      z-index: 2;
+    }
+
+    .panel-caption { color: var(--off-white); font-size: 15px; text-align: center; }
+
+    .quote-block {
+      text-align: center;
+      font-size: clamp(14px, 1.8vw, 20px);
+      font-style: italic;
+      color: var(--off-white);
+      max-width: 800px;
+      margin: 0 auto;
+      padding-top: 32px;
+      border-top: 1px solid var(--navy-line);
+    }
+
+    /* ─────────────────────────────────────────
+       SLIDE 3 — DESIGNING FOR ACCESSIBILITY
+    ───────────────────────────────────────── */
+    #s3 { background: var(--navy); }
+
+    .access-visual {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 48px;
+      margin: 52px 0;
+    }
+
+    .icon-box {
+      width: 120px; height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .arrow-connector {
+      display: flex;
+      align-items: center;
+      gap: 0;
+    }
+
+    .arrow-line {
+      width: 80px;
+      height: 1.5px;
+      background: rgba(180,200,220,0.5);
+      position: relative;
+    }
+
+    .arrow-line::after {
+      content: '';
+      position: absolute;
+      right: -1px;
+      top: 50%;
+      transform: translateY(-50%);
+      border-top: 5px solid transparent;
+      border-bottom: 5px solid transparent;
+      border-left: 8px solid rgba(180,200,220,0.5);
+    }
+
+    .center-label {
+      font-family: var(--mono);
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--white);
+      letter-spacing: 0.08em;
+      text-align: center;
+      margin-top: 24px;
+    }
+
+    /* ─────────────────────────────────────────
+       SLIDE 4-6 — LAYER SYSTEM
+    ───────────────────────────────────────── */
+    .layer-layout {
+      display: flex;
+      align-items: flex-start;
+      gap: 48px;
+      width: 100%;
+    }
+
+    .layer-labels {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      gap: 0;
+      flex: 0 0 220px;
+    }
+
+    .layer-stack {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .layer-annotation {
+      flex: 0 0 280px;
+      display: flex;
+      align-items: center;
+    }
+
+    .annotation-box {
+      font-size: 17px;
+      color: var(--off-white);
+      line-height: 1.6;
+      padding-left: 24px;
+      border-left: 3px solid var(--red);
+    }
+
+    .layer-sidebar-label {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--gray);
+      line-height: 1.3;
+      text-align: right;
+      padding: 16px 0;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    .layer {
+      padding: 20px 24px;
+      border: 1px solid var(--navy-line);
+      background: var(--navy-card);
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      min-height: 90px;
+    }
+
+    .layer-icon {
+      width: 44px;
+      height: 44px;
+      opacity: 0.7;
+      flex-shrink: 0;
+    }
+
+    .layer.active {
+      border-color: var(--red);
+      background: rgba(204,31,31,0.08);
+      box-shadow: 0 0 30px rgba(204,31,31,0.15);
+    }
+
+    .layer.active .layer-tag {
+      color: var(--red-text);
+      background: rgba(204,31,31,0.2);
+      border-color: var(--red);
+    }
+
+    .layer-tag {
+      font-family: var(--mono);
+      font-size: 11px;
+      padding: 4px 10px;
+      border: 1px solid var(--navy-line);
+      color: var(--gray);
+      white-space: nowrap;
+      letter-spacing: 0.08em;
+    }
+
+    .active-label {
+      font-family: var(--mono);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 0.06em;
+      padding: 12px 20px;
+      border: 2px solid var(--red);
+      background: rgba(10,22,40,0.8);
+      box-shadow: 0 0 20px rgba(204,31,31,0.3);
+    }
+
+    /* ─────────────────────────────────────────
+       SLIDE 7 — NAMING AS RETRIEVAL LOGIC
+    ───────────────────────────────────────── */
+    #s7 { background: var(--navy-mid); }
+
+    .naming-layout {
+      display: flex;
+      align-items: center;
+      gap: 60px;
+      width: 100%;
+    }
+
+    .naming-examples { flex: 1; }
+
+    .bad-example {
+      position: relative;
+      display: inline-block;
+      margin: 0 auto 8px;
+    }
+
+    .bad-label {
+      font-family: var(--mono);
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      color: var(--gray);
+      margin-bottom: 12px;
+    }
+
+    .filename-bad {
+      font-family: var(--mono);
+      font-size: clamp(22px, 3vw, 38px);
+      font-weight: 600;
+      color: rgba(255,255,255,0.35);
+      position: relative;
+    }
+
+    .x-cross {
+      position: absolute;
+      inset: -8px;
+      pointer-events: none;
+    }
+
+    .x-cross::before,
+    .x-cross::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 4px;
+      background: var(--red);
+      top: 50%;
+      left: 0;
+      box-shadow: 0 0 12px rgba(204,31,31,0.6);
+    }
+
+    .x-cross::before { transform: translateY(-50%) rotate(12deg); }
+    .x-cross::after  { transform: translateY(-50%) rotate(-12deg); }
+
+    .good-label {
+      font-family: var(--mono);
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      color: var(--gray);
+      margin-top: 36px;
+      margin-bottom: 12px;
+    }
+
+    .filename-good {
+      font-family: var(--mono);
+      font-size: clamp(18px, 2.2vw, 28px);
+      font-weight: 700;
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .fn-part { color: var(--white); }
+    .fn-sep  { color: var(--gray); }
+    .fn-ext  { color: var(--gray); font-weight: 400; }
+
+    .filename-legend {
+      display: flex;
+      gap: 40px;
+      margin-top: 20px;
+    }
+
+    .legend-item {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
+    }
+
+    .legend-arrow {
+      width: 1px;
+      height: 18px;
+      background: var(--gray-mid);
+      margin-left: 6px;
+    }
+
+    .legend-label {
+      font-size: 13px;
+      color: var(--gray);
+    }
+
+    .naming-note {
+      flex: 0 0 220px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+      padding-left: 40px;
+      border-left: 3px solid var(--gray-mid);
+    }
+
+    .naming-note-icon {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: rgba(204,31,31,0.15);
+      border: 1px solid var(--red);
+      display: grid;
+      place-items: center;
+    }
+
+    .naming-note p {
+      font-size: 17px;
+      color: var(--off-white);
+      line-height: 1.6;
+    }
+
+    /* ─────────────────────────────────────────
+       SLIDE 8 — STRUCTURAL HIERARCHY
+    ───────────────────────────────────────── */
+    #s8 { background: var(--navy); }
+
+    .hierarchy-layout {
+      display: flex;
+      align-items: center;
+      gap: 60px;
+      width: 100%;
+    }
+
+    .tree {
+      flex: 1;
+      padding: 40px 48px;
+      border: 1px solid var(--navy-line);
+      background: var(--navy-card);
+    }
+
+    .tree-node {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 10px 0;
+      font-family: var(--mono);
+      font-size: clamp(13px, 1.6vw, 18px);
+      color: var(--off-white);
+    }
+
+    .tree-node.root {
+      font-size: clamp(14px, 1.7vw, 20px);
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .tree-node.child { padding-left: 32px; }
+    .tree-node.grandchild { padding-left: 72px; }
+
+    .tree-connector {
+      position: relative;
+    }
+
+    .folder-icon {
+      opacity: 0.7;
+    }
+
+    .red-branch {
+      width: 3px;
+      height: 100%;
+      position: absolute;
+      left: 32px;
+      top: 0;
+      background: var(--red);
+      opacity: 0.7;
+    }
+
+    .tree-note {
+      flex: 0 0 240px;
+      padding-left: 40px;
+      border-left: 3px solid var(--red);
+      font-size: 17px;
+      color: var(--off-white);
+      line-height: 1.7;
+    }
+
+    /* ─────────────────────────────────────────
+       SLIDE 9 — DOCUMENT DESIGN FOR AGENTS
+    ───────────────────────────────────────── */
+    #s9 { background: var(--navy-mid); }
+
+    .doc-layout {
+      display: flex;
+      align-items: center;
+      gap: 80px;
+      width: 100%;
+    }
+
+    .doc-visual {
+      flex: 0 0 380px;
+      border: 1.5px solid var(--navy-line);
+      background: var(--navy-card);
+    }
+
+    .hot-zone {
+      padding: 24px 28px;
+      background: rgba(204,31,31,0.2);
+      border-bottom: 2px solid var(--red);
+      box-shadow: inset 0 0 40px rgba(204,31,31,0.15);
+    }
+
+    .hot-zone-label {
+      font-family: var(--mono);
+      font-size: 14px;
+      color: var(--off-white);
+      letter-spacing: 0.06em;
+    }
+
+    .doc-body {
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .doc-section {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .doc-line {
+      height: 2px;
+      background: rgba(180,200,220,0.2);
+      border-radius: 1px;
+    }
+
+    .doc-line.short { width: 55%; }
+    .doc-line.medium { width: 75%; }
+    .doc-line.full   { width: 100%; }
+
+    .doc-bullets {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .bullet-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: clamp(16px, 2vw, 22px);
+      font-family: var(--mono);
+      color: var(--off-white);
+    }
+
+    .bullet-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--red);
+      flex-shrink: 0;
+    }
+
+    /* ─────────────────────────────────────────
+       SLIDE 10 — THE MULTIPLIER EFFECT
+    ───────────────────────────────────────── */
+    #s10 { background: var(--navy); }
+
+    .flow-diagram {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      width: 100%;
+      margin-top: 24px;
+    }
+
+    .flow-inputs {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .flow-box {
+      padding: 18px 24px;
+      border: 1.5px solid rgba(180,200,220,0.35);
+      background: rgba(16,32,64,0.6);
+      font-family: var(--mono);
+      font-size: clamp(12px, 1.4vw, 15px);
+      color: var(--off-white);
+      line-height: 1.4;
+      min-width: 200px;
+    }
+
+    .flow-box.active {
+      border-color: var(--red);
+      box-shadow: 0 0 20px rgba(204,31,31,0.2);
+    }
+
+    .flow-arrows {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .flow-arrow {
+      width: 60px;
+      height: 2px;
+      background: var(--red);
+      position: relative;
+    }
+
+    .flow-arrow::after {
+      content: '';
+      position: absolute;
+      right: -1px;
+      top: 50%;
+      transform: translateY(-50%);
+      border-top: 6px solid transparent;
+      border-bottom: 6px solid transparent;
+      border-left: 10px solid var(--red);
+    }
+
+    .ai-ring {
+      width: 160px; height: 160px;
+      border-radius: 50%;
+      border: 3px solid rgba(180,200,220,0.4);
+      display: grid;
+      place-items: center;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .ai-ring::before {
+      content: '';
+      position: absolute;
+      inset: 10px;
+      border-radius: 50%;
+      border: 2px solid rgba(180,200,220,0.25);
+    }
+
+    .ai-ring::after {
+      content: '';
+      position: absolute;
+      inset: -12px;
+      border-radius: 50%;
+      border: 1px solid rgba(204,31,31,0.4);
+      box-shadow: 0 0 40px rgba(204,31,31,0.15);
+    }
+
+    .ai-label {
+      font-family: var(--mono);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 0.06em;
+      text-align: center;
+      z-index: 1;
+    }
+
+    .output-arrow {
+      width: 80px;
+      height: 2px;
+      background: rgba(180,200,220,0.5);
+      position: relative;
+    }
+
+    .output-arrow::after {
+      content: '';
+      position: absolute;
+      right: -1px;
+      top: 50%;
+      transform: translateY(-50%);
+      border-top: 6px solid transparent;
+      border-bottom: 6px solid transparent;
+      border-left: 10px solid rgba(180,200,220,0.5);
+    }
+
+    .output-box {
+      padding: 24px 28px;
+      border: 1.5px solid var(--red);
+      background: rgba(204,31,31,0.08);
+      box-shadow: 0 0 20px rgba(204,31,31,0.15);
+      font-family: var(--mono);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      white-space: nowrap;
+    }
+
+    /* ─────────────────────────────────────────
+       SLIDE 11 — IMPLEMENTATION PROTOCOL
+    ───────────────────────────────────────── */
+    #s11 { background: var(--navy-mid); }
+
+    .clipboard {
+      max-width: 700px;
+      margin: 0 auto;
+      border: 1.5px solid rgba(180,200,220,0.3);
+      background: var(--navy-card);
+      padding: 48px 56px;
+      position: relative;
+    }
+
+    .clipboard::before {
+      content: '';
+      position: absolute;
+      top: -18px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 18px;
+      background: rgba(180,200,220,0.15);
+      border-radius: 4px 4px 0 0;
+      border: 1px solid rgba(180,200,220,0.25);
+      border-bottom: none;
+    }
+
+    .checklist {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .check-item {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .checkbox {
+      width: 28px; height: 28px;
+      border: 2px solid rgba(180,200,220,0.4);
+      flex-shrink: 0;
+    }
+
+    .check-text {
+      font-family: var(--mono);
+      font-size: clamp(13px, 1.5vw, 17px);
+      color: var(--off-white);
+      flex: 1;
+    }
+
+    .check-text .cmd { color: var(--red-text); font-weight: 700; }
+
+    .status-badge {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      color: var(--red-text);
+      border: 1px solid var(--red);
+      padding: 4px 8px;
+      white-space: nowrap;
+    }
+
+    /* ─────────────────────────────────────────
+       SLIDE 12 — OPERATIONAL VELOCITY
+    ───────────────────────────────────────── */
+    #s12 { background: var(--navy); text-align: center; }
+
+    #s12 h1 {
+      font-size: clamp(48px, 7vw, 100px);
+      font-weight: 900;
+      color: transparent;
+      background: linear-gradient(135deg, #c8d8e8 0%, #7a9ab8 50%, #5a7a98 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.03em;
+      margin-bottom: 24px;
+    }
+
+    #s12 .subtitle {
+      font-size: clamp(16px, 2.2vw, 28px);
+      color: var(--gray);
+    }
+
+    .system-active {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 64px;
+      font-family: var(--mono);
+      font-size: 14px;
+      letter-spacing: 0.15em;
+      color: var(--gray);
+    }
+
+    .active-dot {
+      width: 16px; height: 16px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 12px 4px rgba(34,204,102,0.5);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 12px 4px rgba(34,204,102,0.5); }
+      50% { box-shadow: 0 0 20px 8px rgba(34,204,102,0.3); }
+    }
+
+    /* ─── NAV ─── */
+    .nav {
+      position: fixed;
+      right: 24px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      z-index: 100;
+    }
+
+    .nav a {
+      display: block;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: rgba(180,200,220,0.2);
+      border: 1px solid rgba(180,200,220,0.3);
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+
+    .nav a:hover { background: var(--red); border-color: var(--red); }
+
+    /* ─── LAYER HEIGHTS ─── */
+    .layer-label-group {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      justify-content: space-between;
+    }
+
+    @media (max-width: 900px) {
+      .slide { padding: 48px 32px; }
+      .two-panel { grid-template-columns: 1fr; }
+      .panel-divider { width: 100%; height: 1px; }
+      .layer-layout { flex-direction: column; }
+      .naming-layout { flex-direction: column; }
+      .hierarchy-layout { flex-direction: column; }
+      .doc-layout { flex-direction: column; }
+      .flow-diagram { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV DOTS -->
+<nav class="nav">
+  <a href="#s1" title="Cover"></a>
+  <a href="#s2" title="Status Quo vs Goal"></a>
+  <a href="#s3" title="Designing for Accessibility"></a>
+  <a href="#s4" title="4-Layer System"></a>
+  <a href="#s5" title="The Brain"></a>
+  <a href="#s6" title="The Supply Warehouse"></a>
+  <a href="#s7" title="Naming Logic"></a>
+  <a href="#s8" title="Structural Hierarchy"></a>
+  <a href="#s9" title="Document Design"></a>
+  <a href="#s10" title="Multiplier Effect"></a>
+  <a href="#s11" title="Implementation Protocol"></a>
+  <a href="#s12" title="Operational Velocity"></a>
+</nav>
+
+
+<!-- ═══════════════════════════════════════════
+     SLIDE 1 — COVER
+════════════════════════════════════════════ -->
+<section class="slide" id="s1">
+  <div class="grid-bg"></div>
+
+  <!-- Circuit SVG right side -->
+  <div class="circuit-lines-cover">
+    <svg viewBox="0 0 600 700" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g stroke="#4a7aaa" stroke-width="1" opacity="0.6">
+        <line x1="300" y1="350" x2="100" y2="200"/><line x1="300" y1="350" x2="100" y2="350"/>
+        <line x1="300" y1="350" x2="100" y2="500"/><line x1="300" y1="350" x2="500" y2="200"/>
+        <line x1="300" y1="350" x2="500" y2="350"/><line x1="300" y1="350" x2="500" y2="500"/>
+        <line x1="300" y1="350" x2="300" y2="100"/><line x1="300" y1="350" x2="300" y2="600"/>
+        <line x1="100" y1="200" x2="20" y2="140"/><line x1="100" y1="200" x2="20" y2="200"/>
+        <line x1="100" y1="350" x2="20" y2="350"/><line x1="100" y1="500" x2="20" y2="500"/>
+        <line x1="100" y1="500" x2="20" y2="560"/>
+        <line x1="500" y1="200" x2="580" y2="140"/><line x1="500" y1="200" x2="580" y2="200"/>
+        <line x1="500" y1="350" x2="580" y2="350"/><line x1="500" y1="500" x2="580" y2="500"/>
+        <line x1="500" y1="500" x2="580" y2="560"/>
+        <line x1="300" y1="100" x2="240" y2="20"/><line x1="300" y1="100" x2="300" y2="20"/>
+        <line x1="300" y1="100" x2="360" y2="20"/>
+        <line x1="300" y1="600" x2="240" y2="680"/><line x1="300" y1="600" x2="300" y2="680"/>
+        <!-- small squares at endpoints -->
+        <rect x="16" y="136" width="8" height="8"/><rect x="16" y="196" width="8" height="8"/>
+        <rect x="16" y="346" width="8" height="8"/><rect x="16" y="496" width="8" height="8"/>
+        <rect x="576" y="136" width="8" height="8"/><rect x="576" y="196" width="8" height="8"/>
+        <rect x="576" y="346" width="8" height="8"/><rect x="576" y="496" width="8" height="8"/>
+        <rect x="236" y="16" width="8" height="8"/><rect x="296" y="16" width="8" height="8"/>
+        <rect x="356" y="16" width="8" height="8"/>
+      </g>
+    </svg>
+  </div>
+  <div class="red-node"></div>
+
+  <div class="slide-inner" style="position:relative;z-index:4;">
+    <h1>Context Engineering</h1>
+    <p class="subtitle">Information Architecture for Human-AI Collaboration.</p>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     SLIDE 2 — STATUS QUO vs GOAL
+════════════════════════════════════════════ -->
+<section class="slide" id="s2">
+  <div class="grid-bg"></div>
+  <div class="slide-inner">
+    <div class="two-panel">
+      <!-- Left -->
+      <div class="panel">
+        <p class="panel-label">THE STATUS QUO</p>
+        <div class="chaos-box">
+          <svg viewBox="0 0 280 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M140 140 Q80 60 40 100 Q20 160 80 180 Q60 240 120 220 Q160 260 180 200 Q240 240 240 180 Q280 140 220 100 Q240 40 180 60 Q160 20 120 60 Q80 20 60 80 Q20 80 40 140 Z" stroke="#cc2020" stroke-width="2" fill="none"/>
+            <path d="M140 140 Q200 80 180 40 Q220 60 200 120 Q260 100 240 160 Q280 180 240 220 Q220 260 180 240 Q200 280 140 260 Q80 280 100 240 Q60 260 40 220 Q0 200 40 160 Q0 120 40 80 Q60 20 100 60 Q120 20 160 40 Q180 0 220 40" stroke="#cc2020" stroke-width="2" fill="none" opacity="0.6"/>
+          </svg>
+          <span class="chaos-label">Passive<br>Storage</span>
+        </div>
+        <p class="panel-caption">Cognitive Tax &amp; AI Hallucination</p>
+      </div>
+
+      <div class="panel-divider"></div>
+
+      <!-- Right -->
+      <div class="panel">
+        <p class="panel-label">THE GOAL</p>
+        <div class="grid-box">
+          <div class="grid-inner">
+            <div class="grid-node"></div><div class="grid-node"></div><div class="grid-node"></div><div class="grid-node"></div><div class="grid-node"></div>
+            <div class="grid-node"></div><div class="grid-node"></div><div class="grid-node"></div><div class="grid-node"></div><div class="grid-node"></div>
+            <div class="grid-node"></div><div class="grid-node"></div><div class="grid-node"></div><div class="grid-node"></div><div class="grid-node"></div>
+            <div class="grid-node"></div><div class="grid-node"></div><div class="grid-node"></div><div class="grid-node"></div><div class="grid-node"></div>
+            <div class="grid-node"></div><div class="grid-node"></div><div class="grid-node"></div><div class="grid-node"></div><div class="grid-node"></div>
+          </div>
+          <span class="grid-label" style="position:absolute;">Active Loop</span>
+        </div>
+        <p class="panel-caption">&nbsp;</p>
+      </div>
+    </div>
+
+    <div class="quote-block">
+      "If an AI cannot find it, it does not exist. Ambiguity creates error."
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     SLIDE 3 — DESIGNING FOR ACCESSIBILITY
+════════════════════════════════════════════ -->
+<section class="slide" id="s3">
+  <div class="grid-bg"></div>
+  <div class="slide-inner" style="text-align:left;">
+    <h1 style="font-size:clamp(36px,5vw,72px);">Designing for Accessibility</h1>
+    <p class="subtitle">Reducing cognitive load for New Hires and AI Agents simultaneously.</p>
+
+    <div class="access-visual">
+      <!-- Eye icon -->
+      <div class="icon-box">
+        <svg width="100" height="70" viewBox="0 0 100 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="50" cy="35" rx="48" ry="28" stroke="rgba(180,200,220,0.7)" stroke-width="2"/>
+          <circle cx="50" cy="35" r="14" stroke="rgba(180,200,220,0.7)" stroke-width="2"/>
+          <circle cx="50" cy="35" r="6" fill="rgba(180,200,220,0.5)"/>
+        </svg>
+      </div>
+
+      <div class="arrow-line"></div>
+
+      <!-- Document icon -->
+      <div class="icon-box" style="flex-direction:column;gap:0;">
+        <svg width="90" height="110" viewBox="0 0 90 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10 10 L60 10 L80 30 L80 100 L10 100 Z" stroke="rgba(180,200,220,0.7)" stroke-width="2" fill="rgba(16,32,64,0.8)"/>
+          <path d="M60 10 L60 30 L80 30" stroke="rgba(180,200,220,0.7)" stroke-width="2"/>
+          <rect x="20" y="18" width="20" height="6" rx="1" fill="#cc2020"/>
+          <rect x="20" y="38" width="50" height="2" fill="rgba(180,200,220,0.3)"/>
+          <rect x="20" y="46" width="50" height="2" fill="rgba(180,200,220,0.3)"/>
+          <rect x="20" y="54" width="50" height="2" fill="rgba(180,200,220,0.3)"/>
+          <rect x="20" y="62" width="34" height="2" fill="rgba(180,200,220,0.15)"/>
+          <rect x="20" y="78" width="50" height="2" fill="rgba(180,200,220,0.2)"/>
+          <rect x="20" y="86" width="50" height="2" fill="rgba(180,200,220,0.2)"/>
+        </svg>
+        <p class="center-label">Context Engineering</p>
+      </div>
+
+      <div class="arrow-line"></div>
+
+      <!-- Spark icon -->
+      <div class="icon-box">
+        <svg width="90" height="90" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <line x1="45" y1="5"  x2="45" y2="20" stroke="#cc2020" stroke-width="3"/>
+          <line x1="45" y1="70" x2="45" y2="85" stroke="#cc2020" stroke-width="3"/>
+          <line x1="5"  y1="45" x2="20" y2="45" stroke="#cc2020" stroke-width="3"/>
+          <line x1="70" y1="45" x2="85" y2="45" stroke="#cc2020" stroke-width="3"/>
+          <line x1="16" y1="16" x2="27" y2="27" stroke="#cc2020" stroke-width="2"/>
+          <line x1="63" y1="63" x2="74" y2="74" stroke="#cc2020" stroke-width="2"/>
+          <line x1="74" y1="16" x2="63" y2="27" stroke="#cc2020" stroke-width="2"/>
+          <line x1="27" y1="63" x2="16" y2="74" stroke="#cc2020" stroke-width="2"/>
+          <circle cx="45" cy="45" r="16" stroke="#cc2020" stroke-width="1.5" fill="rgba(204,31,31,0.1)"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     SLIDE 4 — THE 4-LAYER PLANT FLOOR
+════════════════════════════════════════════ -->
+<section class="slide" id="s4">
+  <div class="grid-bg"></div>
+  <div class="slide-inner">
+    <h2>The 4-Layer Plant Floor</h2>
+
+    <div class="layer-layout" style="align-items:stretch;">
+      <div class="layer-stack">
+        <!-- Layer 1 - Hot -->
+        <div class="layer">
+          <div>
+            <div class="layer-tag" style="color:var(--red-text);border-color:var(--red);background:rgba(204,31,31,0.1);margin-bottom:8px;">Active Projects (Hot)</div>
+            <div class="mono gray" style="font-size:13px;">Current Sprints</div>
+          </div>
+        </div>
+        <!-- Layer 2 - Ops Core -->
+        <div class="layer">
+          <div>
+            <div class="layer-tag" style="color:var(--red-text);border-color:var(--red);background:rgba(204,31,31,0.1);margin-bottom:8px;">Ongoing Responsibilities (Ops Core)</div>
+            <div class="mono gray" style="font-size:13px;">SOPs &amp; Guidelines</div>
+          </div>
+        </div>
+        <!-- Layer 3 - Library -->
+        <div class="layer">
+          <div>
+            <div class="layer-tag" style="color:var(--red-text);border-color:var(--red);background:rgba(204,31,31,0.1);margin-bottom:8px;">Reference Resources (Library)</div>
+            <div class="mono gray" style="font-size:13px;">Static Assets</div>
+          </div>
+        </div>
+        <!-- Layer 4 - Cold -->
+        <div class="layer">
+          <div>
+            <div class="layer-tag" style="color:var(--red-text);border-color:var(--red);background:rgba(204,31,31,0.1);margin-bottom:8px;">Archives (Cold)</div>
+            <div class="mono gray" style="font-size:13px;">Completed Work</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     SLIDE 5 — THE BRAIN OF THE SYSTEM
+════════════════════════════════════════════ -->
+<section class="slide" id="s5">
+  <div class="grid-bg"></div>
+  <div class="slide-inner">
+    <h2>The Brain of the System</h2>
+
+    <div class="layer-layout">
+      <!-- Layer labels left -->
+      <div class="layer-labels">
+        <div class="layer-sidebar-label">Active Projects (Hot)</div>
+        <div class="layer-sidebar-label">Ongoing Responsibilities<br>(Ops Core)</div>
+        <div class="layer-sidebar-label" style="font-weight:700;color:var(--white);">Reference Resources<br>(Library)</div>
+        <div class="layer-sidebar-label">Archives (Cold)</div>
+      </div>
+
+      <!-- Stack -->
+      <div class="layer-stack">
+        <div class="layer" style="min-height:70px;"></div>
+        <div class="layer" style="min-height:70px;"></div>
+        <div class="layer active" style="min-height:70px;justify-content:center;">
+          <div class="active-label">MESSAGING MATRIX</div>
+        </div>
+        <div class="layer" style="min-height:70px;"></div>
+      </div>
+
+      <!-- Annotation -->
+      <div class="layer-annotation">
+        <div class="annotation-box">
+          Layer 2 holds the Source of Truth. This is where AI looks for tone, facts, and consistency.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     SLIDE 6 — THE SUPPLY WAREHOUSE
+════════════════════════════════════════════ -->
+<section class="slide" id="s6">
+  <div class="grid-bg"></div>
+  <div class="slide-inner">
+    <h2>The Supply Warehouse</h2>
+
+    <div class="layer-layout">
+      <!-- Layer labels left -->
+      <div class="layer-labels">
+        <div class="layer-sidebar-label">Active Projects (Hot)</div>
+        <div class="layer-sidebar-label">Ongoing Responsibilities<br>(Ops Core)</div>
+        <div class="layer-sidebar-label" style="font-weight:700;color:var(--white);">Reference Resources<br>(Library)</div>
+        <div class="layer-sidebar-label">Archives (Cold)</div>
+      </div>
+
+      <!-- Stack -->
+      <div class="layer-stack">
+        <div class="layer" style="min-height:70px;"></div>
+        <div class="layer" style="min-height:70px;"></div>
+        <div class="layer active" style="min-height:70px;justify-content:center;">
+          <div class="active-label" style="text-align:center;line-height:1.3;">DAM<br><span style="font-size:12px;font-weight:400;">(Digital Asset Management)</span></div>
+        </div>
+        <div class="layer" style="min-height:70px;"></div>
+      </div>
+
+      <!-- Annotation -->
+      <div class="layer-annotation">
+        <div class="annotation-box">
+          Layer 3 holds raw materials. The AI retrieves assets from here to build outputs in Layer 1.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     SLIDE 7 — NAMING AS RETRIEVAL LOGIC
+════════════════════════════════════════════ -->
+<section class="slide" id="s7">
+  <div class="grid-bg"></div>
+  <div class="slide-inner">
+    <h2>Naming as Retrieval Logic</h2>
+
+    <div class="naming-layout">
+      <div class="naming-examples">
+        <!-- Bad -->
+        <p class="bad-label">The Bad</p>
+        <div class="bad-example">
+          <div class="filename-bad">MarketingPlan.docx</div>
+          <div class="x-cross"></div>
+        </div>
+
+        <!-- Good -->
+        <p class="good-label" style="margin-top:48px;">The Good</p>
+        <div class="filename-good">
+          <span class="fn-part">2026</span>
+          <span class="fn-sep"> - </span>
+          <span class="fn-part">MKT</span>
+          <span class="fn-sep"> - </span>
+          <span class="fn-part">Campaign Plan</span>
+          <span class="fn-sep"> - </span>
+          <span class="fn-part">Draft</span><span class="fn-ext">.docx</span>
+        </div>
+
+        <div class="filename-legend">
+          <div class="legend-item">
+            <div class="legend-arrow"></div>
+            <span class="legend-label">Year</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-arrow"></div>
+            <span class="legend-label">Category</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-arrow"></div>
+            <span class="legend-label">Content</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-arrow"></div>
+            <span class="legend-label">Status</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="naming-note">
+        <div class="naming-note-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <circle cx="10" cy="10" r="8" stroke="#cc2020" stroke-width="1.5"/>
+            <circle cx="10" cy="6" r="1.5" fill="#cc2020"/>
+            <line x1="10" y1="9" x2="10" y2="15" stroke="#cc2020" stroke-width="2"/>
+          </svg>
+        </div>
+        <p>Structured keywords prevent AI hallucination.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     SLIDE 8 — STRUCTURAL HIERARCHY (GENERIC)
+════════════════════════════════════════════ -->
+<section class="slide" id="s8">
+  <div class="grid-bg"></div>
+  <div class="slide-inner">
+    <h2>Structural Hierarchy</h2>
+
+    <div class="hierarchy-layout">
+      <div class="tree">
+        <!-- Root -->
+        <div class="tree-node root">
+          <svg class="folder-icon" width="28" height="22" viewBox="0 0 28 22" fill="none">
+            <path d="M2 4 Q2 2 4 2 L10 2 L12 5 L24 5 Q26 5 26 7 L26 19 Q26 21 24 21 L4 21 Q2 21 2 19 Z" stroke="rgba(180,200,220,0.6)" stroke-width="1.5" fill="rgba(16,32,64,0.6)"/>
+          </svg>
+          <span class="mono" style="letter-spacing:0.06em;">2026 · [AGENCY] · CLIENT NAME</span>
+        </div>
+
+        <div style="position:relative;padding-left:32px;">
+          <!-- Red vertical line -->
+          <div style="position:absolute;left:13px;top:0;bottom:0;width:2px;background:rgba(204,31,31,0.5);"></div>
+
+          <!-- Child project -->
+          <div class="tree-node child">
+            <svg class="folder-icon" width="24" height="19" viewBox="0 0 28 22" fill="none">
+              <path d="M2 4 Q2 2 4 2 L10 2 L12 5 L24 5 Q26 5 26 7 L26 19 Q26 21 24 21 L4 21 Q2 21 2 19 Z" stroke="rgba(180,200,220,0.5)" stroke-width="1.5" fill="rgba(16,32,64,0.4)"/>
+            </svg>
+            <span class="mono" style="color:var(--off-white);">2601PR&nbsp; Project Name</span>
+          </div>
+
+          <div style="position:relative;padding-left:32px;">
+            <!-- Sub red line -->
+            <div style="position:absolute;left:13px;top:0;bottom:0;width:2px;background:rgba(204,31,31,0.35);"></div>
+
+            <div class="tree-node grandchild" style="padding-left:0;">
+              <svg class="folder-icon" width="20" height="17" viewBox="0 0 28 22" fill="none">
+                <path d="M2 4 Q2 2 4 2 L10 2 L12 5 L24 5 Q26 5 26 7 L26 19 Q26 21 24 21 L4 21 Q2 21 2 19 Z" stroke="rgba(180,200,220,0.4)" stroke-width="1.5" fill="rgba(16,32,64,0.3)"/>
+              </svg>
+              <span class="mono gray">2601BA&nbsp; Business Admin</span>
+            </div>
+            <div class="tree-node grandchild" style="padding-left:0;">
+              <svg class="folder-icon" width="20" height="17" viewBox="0 0 28 22" fill="none">
+                <path d="M2 4 Q2 2 4 2 L10 2 L12 5 L24 5 Q26 5 26 7 L26 19 Q26 21 24 21 L4 21 Q2 21 2 19 Z" stroke="rgba(180,200,220,0.4)" stroke-width="1.5" fill="rgba(16,32,64,0.3)"/>
+              </svg>
+              <span class="mono gray">2601AS&nbsp; Assets (Local)</span>
+            </div>
+            <div class="tree-node grandchild" style="padding-left:0;">
+              <svg class="folder-icon" width="20" height="17" viewBox="0 0 28 22" fill="none">
+                <path d="M2 4 Q2 2 4 2 L10 2 L12 5 L24 5 Q26 5 26 7 L26 19 Q26 21 24 21 L4 21 Q2 21 2 19 Z" stroke="rgba(180,200,220,0.4)" stroke-width="1.5" fill="rgba(16,32,64,0.3)"/>
+              </svg>
+              <span class="mono gray">2601CR&nbsp; Creative (Drafts)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tree-note">
+        Standardized paths eliminate the search loop.
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     SLIDE 9 — DOCUMENT DESIGN FOR AGENTS
+════════════════════════════════════════════ -->
+<section class="slide" id="s9">
+  <div class="grid-bg"></div>
+  <div class="slide-inner">
+    <h2>Document Design for Agents</h2>
+
+    <div class="doc-layout">
+      <!-- Document visual -->
+      <div class="doc-visual">
+        <div class="hot-zone">
+          <span class="hot-zone-label mono">HOT ZONE: Context Summary</span>
+        </div>
+        <div class="doc-body">
+          <div class="doc-section">
+            <div class="doc-line short"></div>
+            <div class="doc-line full"></div>
+            <div class="doc-line full"></div>
+            <div class="doc-line full"></div>
+            <div class="doc-line medium"></div>
+          </div>
+          <div class="doc-section">
+            <div class="doc-line short"></div>
+            <div class="doc-line full"></div>
+            <div class="doc-line full"></div>
+            <div class="doc-line full"></div>
+            <div class="doc-line full"></div>
+            <div class="doc-line full"></div>
+            <div class="doc-line medium"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bullet list -->
+      <div class="doc-bullets">
+        <div class="bullet-item">
+          <div class="bullet-dot"></div>
+          <span>Summary at the top</span>
+        </div>
+        <div class="bullet-item">
+          <div class="bullet-dot"></div>
+          <span>Explicit Context</span>
+        </div>
+        <div class="bullet-item">
+          <div class="bullet-dot"></div>
+          <span>Clear Headers</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     SLIDE 10 — THE MULTIPLIER EFFECT
+════════════════════════════════════════════ -->
+<section class="slide" id="s10">
+  <div class="grid-bg"></div>
+  <div class="slide-inner">
+    <h2>The Multiplier Effect</h2>
+
+    <div class="flow-diagram">
+      <!-- Inputs -->
+      <div class="flow-inputs">
+        <div class="flow-box active">
+          Client Context<br><span class="gray" style="font-size:12px;">(Layer 1)</span>
+        </div>
+        <div class="flow-box active">
+          Tone / Matrix<br><span class="gray" style="font-size:12px;">(Layer 2)</span>
+        </div>
+        <div class="flow-box active">
+          Assets / DAM<br><span class="gray" style="font-size:12px;">(Layer 3)</span>
+        </div>
+      </div>
+
+      <!-- Arrows to AI -->
+      <div class="flow-arrows">
+        <div class="flow-arrow"></div>
+        <div class="flow-arrow"></div>
+        <div class="flow-arrow"></div>
+      </div>
+
+      <!-- AI Ring -->
+      <div class="ai-ring">
+        <div class="ai-label">AI<br>Agent</div>
+      </div>
+
+      <!-- Output arrow -->
+      <div class="output-arrow"></div>
+
+      <!-- Output -->
+      <div class="output-box">
+        <svg width="28" height="34" viewBox="0 0 28 34" fill="none">
+          <path d="M4 4 L18 4 L24 10 L24 30 L4 30 Z" stroke="#cc2020" stroke-width="1.5" fill="rgba(204,31,31,0.1)"/>
+          <path d="M18 4 L18 10 L24 10" stroke="#cc2020" stroke-width="1.5"/>
+        </svg>
+        Instant<br>Draft
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     SLIDE 11 — IMPLEMENTATION PROTOCOL
+════════════════════════════════════════════ -->
+<section class="slide" id="s11">
+  <div class="grid-bg"></div>
+  <div class="slide-inner">
+    <h2>Implementation Protocol</h2>
+
+    <div class="clipboard">
+      <div class="checklist">
+        <div class="check-item">
+          <div class="checkbox"></div>
+          <div class="check-text">
+            <span class="cmd">MIGRATE:</span> Messaging Matrix to Layer 2
+          </div>
+          <div class="status-badge">STATUS:<br>PENDING</div>
+        </div>
+        <div class="check-item">
+          <div class="checkbox"></div>
+          <div class="check-text">
+            <span class="cmd">MIGRATE:</span> DAM Assets to Layer 3
+          </div>
+          <div class="status-badge">STATUS:<br>PENDING</div>
+        </div>
+        <div class="check-item">
+          <div class="checkbox"></div>
+          <div class="check-text">
+            <span class="cmd">ENFORCE:</span> Year-Category-Content Naming
+          </div>
+          <div class="status-badge">STATUS:<br>PENDING</div>
+        </div>
+        <div class="check-item">
+          <div class="checkbox"></div>
+          <div class="check-text">
+            <span class="cmd">REFACTOR:</span> Add Context Summaries to Key Docs
+          </div>
+          <div class="status-badge">STATUS:<br>PENDING</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     SLIDE 12 — OPERATIONAL VELOCITY
+════════════════════════════════════════════ -->
+<section class="slide" id="s12">
+  <div class="grid-bg"></div>
+  <div class="slide-inner" style="text-align:center;">
+    <h1>Operational Velocity</h1>
+    <p class="subtitle">Stop remembering files. Start generating value.</p>
+    <div class="system-active">
+      <div class="active-dot"></div>
+      SYSTEM ACTIVE
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
